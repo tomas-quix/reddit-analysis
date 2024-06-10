@@ -8,8 +8,8 @@ metadata:
 deployments:
   - name: reddit-source
     application: reddit-source
-    version: latest
     deploymentType: Service
+    version: latest
     resources:
       cpu: 1000
       memory: 500
@@ -33,11 +33,11 @@ deployments:
         inputType: Secret
         description: Secret of the Reddit app registered in your dev portal in Reddit.
         required: true
-        value: client_secret
+        secretKey: client_secret
   - name: sentiment-analysis
     application: sentiment-analysis
-    version: latest
     deploymentType: Service
+    version: latest
     resources:
       cpu: 1000
       memory: 1000
@@ -55,8 +55,8 @@ deployments:
         value: sentiment
   - name: words-ranking
     application: words-ranking
-    version: latest
     deploymentType: Service
+    version: latest
     resources:
       cpu: 1000
       memory: 500
@@ -74,8 +74,8 @@ deployments:
         value: words-count
   - name: influxdb-3-destination
     application: influxdb-3-destination
-    version: latest
     deploymentType: Service
+    version: latest
     resources:
       cpu: 200
       memory: 500
@@ -95,7 +95,7 @@ deployments:
         inputType: Secret
         description: Authentication token to access InfluxDB.
         required: true
-        value: INFLUXDB_TOKEN
+        secretKey: INFLUXDB_TOKEN
       - name: INFLUXDB_ORG
         inputType: FreeText
         description: Organization name in InfluxDB.
@@ -123,4 +123,7 @@ deployments:
         value: ''
 
 # This section describes the Topics of the data pipeline
-topics: []
+topics:
+  - name: words-count
+    configuration:
+      partitions: 1
