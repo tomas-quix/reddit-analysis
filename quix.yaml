@@ -130,3 +130,9 @@ topics:
   - name: reddit-raw
     configuration:
       partitions: 1
+  - name: repartition__words-count-v1.3--reddit-raw--word
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: 1440
+      retentionInBytes: 52428800
