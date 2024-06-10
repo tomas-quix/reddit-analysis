@@ -33,6 +33,7 @@ deployments:
         inputType: Secret
         description: Secret of the Reddit app registered in your dev portal in Reddit.
         required: true
+        value: client_secret
   - name: sentiment-analysis
     application: sentiment-analysis
     version: latest
