@@ -6,6 +6,21 @@ variables:
     description: Name of the output topic to write into
     defaultValue: reddit-raw
     required: true
+  - name: subreddits
+    inputType: FreeText
+    description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
+    defaultValue: python,data,kafka
+    required: true
+  - name: client_id
+    inputType: FreeText
+    description: ID of the Reddit app registered in your dev portal in Reddit.
+    defaultValue: 
+    required: true
+  - name: client_secret
+    inputType: Secret
+    description: Secret of the Reddit app registered in your dev portal in Reddit.
+    defaultValue: 
+    required: true
 dockerfile: dockerfile
 runEntryPoint: main.py
 defaultFile: main.py

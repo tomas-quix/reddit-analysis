@@ -83,6 +83,7 @@ if __name__ == "__main__":
             # Join threads to main thread
             for thread in threads:
                 thread.join()
+                
               
 
         print("All rows published")

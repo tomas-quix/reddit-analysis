@@ -7,6 +7,29 @@ services:
       dockerfile: dockerfile
     environment:
       output: reddit-raw
+      subreddits: python,data,kafka
+      client_id: MXdw6mQewFVRV6H5bdWh2Q
+      client_secret: LHL3GiuokeW2DgYiEuDIgwi3We2f_g
+      Quix__Broker__Address: kafka-broker:9092
+  sentiment-analysis:
+    volumes:
+      - /dev/null:/app/.env
+    build:
+      context: sentiment-analysis
+      dockerfile: dockerfile
+    environment:
+      input: reddit-raw
+      output: sentiment
+      Quix__Broker__Address: kafka-broker:9092
+  words-ranking:
+    volumes:
+      - /dev/null:/app/.env
+    build:
+      context: words-ranking
+      dockerfile: dockerfile
+    environment:
+      input: reddit-raw
+      output: words-count
       Quix__Broker__Address: kafka-broker:9092
   kafka-broker:
     image: docker.redpanda.com/redpandadata/redpanda:v24.1.1
