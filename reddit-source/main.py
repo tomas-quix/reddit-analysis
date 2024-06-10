@@ -16,7 +16,7 @@ subreddits = os.environ["subreddits"].split(",")
 # Replace the following values with your Reddit app credentials
 client_id = os.environ["client_id"]
 client_secret = os.environ["client_secret"]
-user_agent = 'quix-source'
+user_agent = 'quix-source-v1'
 
 # Initialize the Reddit instance
 reddit = Reddit(client_id=client_id,
