@@ -29,6 +29,7 @@ deployments:
         inputType: FreeText
         description: ID of the Reddit app registered in your dev portal in Reddit.
         required: true
+        value: MXdw6mQewFVRV6H5bdWh2Q
       - name: client_secret
         inputType: Secret
         description: Secret of the Reddit app registered in your dev portal in Reddit.
