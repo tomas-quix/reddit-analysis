@@ -94,7 +94,7 @@ deployments:
         inputType: Secret
         description: Authentication token to access InfluxDB.
         required: true
-        value: ''
+        value: INFLUXDB_TOKEN
       - name: INFLUXDB_ORG
         inputType: FreeText
         description: Organization name in InfluxDB.
