@@ -127,3 +127,6 @@ topics:
   - name: words-count
     configuration:
       partitions: 1
+  - name: reddit-raw
+    configuration:
+      partitions: 1
