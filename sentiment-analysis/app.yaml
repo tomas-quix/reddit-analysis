@@ -21,6 +21,11 @@ variables:
     description: For the table structured input, specify name of the column where input text is located.
     defaultValue: text
     required: false
+  - name: HuggingFaceModel
+    inputType: FreeText
+    description: ''
+    defaultValue: distilbert-base-uncased-finetuned-sst-2-english
+    required: true
 dockerfile: dockerfile
 runEntryPoint: main.py
 defaultFile: hugging_face_model.py
