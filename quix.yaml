@@ -8,8 +8,8 @@ metadata:
 deployments:
   - name: reddit-source
     application: reddit-source
-    deploymentType: Service
     version: latest
+    deploymentType: Service
     resources:
       cpu: 1000
       memory: 500
@@ -37,8 +37,8 @@ deployments:
         secretKey: client_secret
   - name: sentiment-analysis
     application: sentiment-analysis
-    deploymentType: Service
     version: latest
+    deploymentType: Service
     resources:
       cpu: 1000
       memory: 1000
@@ -56,8 +56,8 @@ deployments:
         value: sentiment
   - name: words-ranking
     application: words-ranking
-    deploymentType: Service
     version: latest
+    deploymentType: Service
     resources:
       cpu: 1000
       memory: 500
@@ -75,8 +75,8 @@ deployments:
         value: words-count
   - name: influxdb-3-destination
     application: influxdb-3-destination
-    deploymentType: Service
     version: latest
+    deploymentType: Service
     resources:
       cpu: 200
       memory: 500
@@ -131,12 +131,9 @@ topics:
   - name: reddit-raw
     configuration:
       partitions: 1
-  - name: repartition__words-count-v1.3--reddit-raw--word
+  - name: sentiment
     configuration:
       partitions: 1
-      replicationFactor: 2
-      retentionInMinutes: 1440
-      retentionInBytes: 52428800
-  - name: sentiment
+  - name: hugging-face-output
     configuration:
       partitions: 1
