@@ -46,14 +46,24 @@ deployments:
     variables:
       - name: input
         inputType: InputTopic
-        description: Name of the input topic to listen to.
-        required: false
+        description: This is the raw data input topic
+        required: true
         value: reddit-raw
       - name: output
         inputType: OutputTopic
-        description: Name of the output topic to write to.
-        required: false
+        description: This is the output for the hugging face model score
+        required: true
         value: sentiment
+      - name: HuggingFaceModel
+        inputType: FreeText
+        description: ''
+        required: true
+        value: distilbert-base-uncased-finetuned-sst-2-english
+      - name: TextColumnName
+        inputType: FreeText
+        description: For the table structured input, specify name of the column where input text is located.
+        required: false
+        value: text
   - name: words-ranking
     application: words-ranking
     version: latest
