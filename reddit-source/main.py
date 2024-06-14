@@ -51,6 +51,7 @@ def listen_to_subreddit(subreddit_name, producer):
                     value=json_data,
                     timestamp=int(msg["created_utc"] * 1000)
                 )
+                time.sleep(0.1)
         except APIException as e:
             if e.error_type == 'RATELIMIT':
                 print("Rate limit exceeded, sleeping for 60 seconds...")
