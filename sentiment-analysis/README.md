@@ -1,12 +1,16 @@
-# Starter transformation
+# Hugging Face model
 
-[This code sample](https://github.com/quixio/quix-samples/tree/develop/python/transformations/starter_transformation) demonstrates how to consume data from a topic, apply a simple transformation to that data and publish the result to an output topic (while printing content to the console output).
+[This code sample](https://github.com/quixio/quix-samples/tree/develop/python/transformations/hugging_face_model) demonstrates how to consume data from a Kafka topic, use an ML model (downloaded from [Hugging Face](https://huggingface.co/)) to run inference on a specific field within the data, then publish the results to an output topic:
 
-Modify the Python code to transform your data on the fly.
+- It listens to the input Kafka topic for data to predict on.
+- It generates a prediction using the selected Hugging Face model.
+- It outputs the class and score of the prediction to another Kafka topic.
 
 ## How to run
 
 Create a [Quix](https://portal.platform.quix.ai/self-sign-up?xlink=github) account or log-in and visit the Samples to use this project.
+
+Clicking `Deploy` on the Sample, deploys a pre-built container in Quix. Complete the environment variables to configure the container.
 
 Clicking `Edit code` on the Sample, forks the project to your own Git repo so you can customize it before deploying.
 
@@ -14,8 +18,14 @@ Clicking `Edit code` on the Sample, forks the project to your own Git repo so yo
 
 The code sample uses the following environment variables:
 
-- **input**: Name of the input topic to listen to.
-- **output**: Name of the output topic to write to.
+- **input**: This is the raw data input topic.
+- **output**: This is the output for the hugging face model score.
+- **HuggingFaceModel**: Name of the Hugging Face model to be used. A list of available Hugging Face models can be found [here](https://huggingface.co/models).
+- **TextColumnName**: "For the table structured input, name of the column where input text to perform predictions on."
+
+## Requirements/prerequisites
+
+When deploying this Python project, ensure you allow enough computational resources (1GB RAM) to host and execute the Hugging Face pipeline objects.
 
 ## Contribute
 
