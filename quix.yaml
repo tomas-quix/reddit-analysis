@@ -212,3 +212,4 @@ topics:
   - name: sentiment-1hour
     configuration:
       partitions: 1
+      retentionInMinutes: -1
