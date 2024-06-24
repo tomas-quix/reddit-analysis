@@ -145,3 +145,9 @@ topics:
   - name: hugging-face-output
     configuration:
       partitions: 1
+  - name: reddit-raw
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: -1
+      retentionInBytes: 52428800
