@@ -1,0 +1,46 @@
+name: influxdb-3-destination
+language: Python
+variables:
+  - name: input
+    inputType: InputTopic
+    description: This is the input topic
+    defaultValue: words-count
+    required: true
+  - name: INFLUXDB_HOST
+    inputType: FreeText
+    description: Host address for the InfluxDB instance.
+    defaultValue: https://us-east-1-1.aws.cloud2.influxdata.com
+    required: true
+  - name: INFLUXDB_TOKEN
+    inputType: Secret
+    description: Authentication token to access InfluxDB.
+    defaultValue: ''
+    required: true
+  - name: INFLUXDB_ORG
+    inputType: FreeText
+    description: Organization name in InfluxDB.
+    defaultValue: 'Quix'
+    required: false
+  - name: INFLUXDB_MEASUREMENT_NAME
+    inputType: FreeText
+    description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
+    defaultValue: words-count
+    required: false
+  - name: INFLUXDB_DATABASE
+    inputType: FreeText
+    description: Database name in InfluxDB where data should be stored.
+    defaultValue: 'Quix'
+    required: true
+  - name: CONSUMER_GROUP_NAME
+    inputType: FreeText
+    description: The name of the consumer group to use when consuming from Kafka
+    defaultValue: influxdb-sink
+    required: true
+  - name: TIMESTAMP_COLUMN
+    inputType: FreeText
+    description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
+    defaultValue: ''
+    required: false
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py

@@ -1,0 +1,16 @@
+name: Sentiment Analysis
+language: python
+variables:
+  - name: input
+    inputType: InputTopic
+    description: This is the raw data input topic
+    defaultValue: reddit-raw
+    required: true
+  - name: output
+    inputType: OutputTopic
+    description: This is the output for the hugging face model score
+    defaultValue: hugging-face-output
+    required: true
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
