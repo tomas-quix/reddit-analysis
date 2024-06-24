@@ -51,6 +51,7 @@ def process_submission(post, producer):
                 value=json_data,
                 timestamp=int(msg["created_utc"] * 1000)
             )
+            break
         except APIException as e:
             if e.error_type == 'RATELIMIT':
                 print("Rate limit exceeded, sleeping for 60 seconds...")
