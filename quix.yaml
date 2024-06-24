@@ -29,6 +29,7 @@ deployments:
         inputType: FreeText
         description: ID of the Reddit app registered in your dev portal in Reddit.
         required: true
+        value: {{client_id}}
       - name: client_secret
         inputType: Secret
         description: Secret of the Reddit app registered in your dev portal in Reddit.
@@ -52,7 +53,7 @@ deployments:
         inputType: OutputTopic
         description: This is the output for the hugging face model score
         required: true
-        value: hugging-face-output
+        value: sentiment
   - name: words-ranking
     application: words-ranking
     version: latest
