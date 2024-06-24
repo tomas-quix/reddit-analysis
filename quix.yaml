@@ -150,4 +150,7 @@ topics:
       partitions: 1
       replicationFactor: 2
       retentionInMinutes: -1
-      retentionInBytes: 262144000
+      retentionInBytes: 52428800
+  - name: sentiment-1hour
+    configuration:
+      partitions: 1
