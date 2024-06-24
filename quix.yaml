@@ -141,6 +141,8 @@ topics:
   - name: reddit-raw
     configuration:
       partitions: 1
+      retentionInMinutes: -1
+      retentionInBytes: 262144000
   - name: sentiment
     configuration:
       partitions: 1
