@@ -138,14 +138,16 @@ topics:
   - name: words-count
     configuration:
       partitions: 1
-  - name: reddit-raw
-    configuration:
-      partitions: 1
-      retentionInMinutes: -1
-      retentionInBytes: 262144000
   - name: sentiment
     configuration:
       partitions: 1
+      retentionInMinutes: -1
   - name: hugging-face-output
     configuration:
       partitions: 1
+  - name: reddit-raw
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: -1
+      retentionInBytes: 262144000
