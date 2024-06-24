@@ -138,11 +138,6 @@ topics:
   - name: words-count
     configuration:
       partitions: 1
-  - name: reddit-raw
-    configuration:
-      partitions: 4
-      retentionInMinutes: -1
-      retentionInBytes: 262144000
   - name: sentiment
     configuration:
       partitions: 1
