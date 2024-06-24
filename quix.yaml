@@ -212,3 +212,6 @@ topics:
   - name: sentiment-1hour
     configuration:
       partitions: 1
+  - name: sentiment-average-1h
+    configuration:
+      partitions: 1
