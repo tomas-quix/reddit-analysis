@@ -7,9 +7,9 @@ services:
       dockerfile: dockerfile
     environment:
       output: reddit-raw
-      subreddits: python,data,kafka
+      subreddits: python,data,kafka,announcements,AskReddit
       client_id: MXdw6mQewFVRV6H5bdWh2Q
-      client_secret: LHL3GiuokeW2DgYiEuDIgwi3We2f_g
+      client_secret: 
       Quix__Broker__Address: kafka-broker:9092
   sentiment-analysis:
     volumes:
@@ -30,6 +30,22 @@ services:
     environment:
       input: reddit-raw
       output: words-count
+      Quix__Broker__Address: kafka-broker:9092
+  influxdb-3-destination:
+    volumes:
+      - /dev/null:/app/.env
+    build:
+      context: influxdb-3-destination
+      dockerfile: dockerfile
+    environment:
+      input: words-count
+      INFLUXDB_HOST: https://us-east-1-1.aws.cloud2.influxdata.com
+      INFLUXDB_TOKEN: 
+      INFLUXDB_ORG: Quix
+      INFLUXDB_MEASUREMENT_NAME: words-count
+      INFLUXDB_DATABASE: Quix
+      CONSUMER_GROUP_NAME: influxdb-sink
+      TIMESTAMP_COLUMN: ''
       Quix__Broker__Address: kafka-broker:9092
   kafka-broker:
     image: docker.redpanda.com/redpandadata/redpanda:v24.1.1
