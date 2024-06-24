@@ -24,12 +24,11 @@ deployments:
         inputType: FreeText
         description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
         required: true
-        value: python,data,kafka,announcements,AskReddit
+        value: python,data,kafka
       - name: client_id
         inputType: FreeText
         description: ID of the Reddit app registered in your dev portal in Reddit.
         required: true
-        value: MXdw6mQewFVRV6H5bdWh2Q
       - name: client_secret
         inputType: Secret
         description: Secret of the Reddit app registered in your dev portal in Reddit.
@@ -53,17 +52,7 @@ deployments:
         inputType: OutputTopic
         description: This is the output for the hugging face model score
         required: true
-        value: sentiment
-      - name: HuggingFaceModel
-        inputType: FreeText
-        description: ''
-        required: true
-        value: distilbert-base-uncased-finetuned-sst-2-english
-      - name: TextColumnName
-        inputType: FreeText
-        description: For the table structured input, specify name of the column where input text is located.
-        required: false
-        value: text
+        value: hugging-face-output
   - name: words-ranking
     application: words-ranking
     version: latest
@@ -83,7 +72,7 @@ deployments:
         description: Name of the output topic to write to.
         required: false
         value: words-count
-  - name: influxdb-3-destination
+  - name: influxdb-3-words-count
     application: influxdb-3-destination
     version: latest
     deploymentType: Service
@@ -106,6 +95,7 @@ deployments:
         inputType: Secret
         description: Authentication token to access InfluxDB.
         required: true
+        value: ''
         secretKey: INFLUXDB_TOKEN
       - name: INFLUXDB_ORG
         inputType: FreeText
@@ -117,6 +107,56 @@ deployments:
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
         value: words-count
+      - name: INFLUXDB_DATABASE
+        inputType: FreeText
+        description: Database name in InfluxDB where data should be stored.
+        required: true
+        value: Quix
+      - name: CONSUMER_GROUP_NAME
+        inputType: FreeText
+        description: The name of the consumer group to use when consuming from Kafka
+        required: true
+        value: influxdb-sink
+      - name: TIMESTAMP_COLUMN
+        inputType: FreeText
+        description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
+        required: false
+        value: ''
+  - name: influxdb-3-sentiment-average-1h
+    application: influxdb-3-destination
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic
+        required: true
+        value: sentiment-average-1h
+      - name: INFLUXDB_HOST
+        inputType: FreeText
+        description: Host address for the InfluxDB instance.
+        required: true
+        value: https://us-east-1-1.aws.cloud2.influxdata.com
+      - name: INFLUXDB_TOKEN
+        inputType: Secret
+        description: Authentication token to access InfluxDB.
+        required: true
+        value: ''
+        secretKey: INFLUXDB_TOKEN
+      - name: INFLUXDB_ORG
+        inputType: FreeText
+        description: Organization name in InfluxDB.
+        required: false
+        value: Quix
+      - name: INFLUXDB_MEASUREMENT_NAME
+        inputType: FreeText
+        description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
+        required: false
+        value: sentiment-average-1h
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
