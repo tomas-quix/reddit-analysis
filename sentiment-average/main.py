@@ -27,6 +27,7 @@ sdf = sdf.apply(lambda row, key, *_: {
     }
 }, metadata=True)
 
+
 sdf = sdf.update(lambda row: print(row))
 
 sdf = sdf.to_topic(output_topic)
