@@ -132,6 +132,25 @@ deployments:
         description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
         required: false
         value: ''
+  - name: sentiment-average
+    application: sentiment-average
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 500
+      memory: 500
+      replicas: 1
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: false
+        value: sentiment
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        required: false
+        value: sentiment-1hour
 
 # This section describes the Topics of the data pipeline
 topics:
