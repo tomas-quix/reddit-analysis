@@ -24,11 +24,12 @@ deployments:
         inputType: FreeText
         description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
         required: true
-        value: python,data,kafka
+        value: python,data,kafka,announcements,AskReddit
       - name: client_id
         inputType: FreeText
         description: ID of the Reddit app registered in your dev portal in Reddit.
         required: true
+        value: {{client_id}}
       - name: client_secret
         inputType: Secret
         description: Secret of the Reddit app registered in your dev portal in Reddit.
@@ -52,7 +53,7 @@ deployments:
         inputType: OutputTopic
         description: This is the output for the hugging face model score
         required: true
-        value: hugging-face-output
+        value: sentiment
   - name: words-ranking
     application: words-ranking
     version: latest
@@ -134,7 +135,7 @@ deployments:
         inputType: InputTopic
         description: This is the input topic
         required: true
-        value: sentiment-average-1h
+        value: sentiment-1hour
       - name: INFLUXDB_HOST
         inputType: FreeText
         description: Host address for the InfluxDB instance.
@@ -195,13 +196,11 @@ topics:
   - name: words-count
     configuration:
       partitions: 1
+      retentionInMinutes: -1
   - name: sentiment
     configuration:
       partitions: 1
       retentionInMinutes: -1
-  - name: hugging-face-output
-    configuration:
-      partitions: 1
   - name: reddit-raw
     configuration:
       partitions: 1
@@ -211,3 +210,4 @@ topics:
   - name: sentiment-1hour
     configuration:
       partitions: 1
+      retentionInMinutes: -1
