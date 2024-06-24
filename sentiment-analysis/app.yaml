@@ -1,4 +1,4 @@
-name: Hugging Face Model Transformation
+name: Sentiment Analysis
 language: python
 variables:
   - name: input
@@ -11,16 +11,6 @@ variables:
     description: This is the output for the hugging face model score
     defaultValue: hugging-face-output
     required: true
-  - name: HuggingFaceModel
-    inputType: FreeText
-    description: Name of the Hugging Face model to be used
-    defaultValue: distilbert-base-uncased-finetuned-sst-2-english
-    required: true
-  - name: TextColumnName
-    inputType: FreeText
-    description: For the table structured input, specify name of the column where input text is located.
-    defaultValue: text
-    required: false
 dockerfile: dockerfile
 runEntryPoint: main.py
-defaultFile: hugging_face_model.py
+defaultFile: main.py
