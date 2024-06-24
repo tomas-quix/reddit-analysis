@@ -8,7 +8,7 @@ services:
     environment:
       output: reddit-raw
       subreddits: python,data,kafka,announcements,AskReddit
-      client_id: MXdw6mQewFVRV6H5bdWh2Q
+      client_id: 
       client_secret: 
       Quix__Broker__Address: kafka-broker:9092
   sentiment-analysis:
@@ -20,6 +20,8 @@ services:
     environment:
       input: reddit-raw
       output: sentiment
+      HuggingFaceModel: distilbert-base-uncased-finetuned-sst-2-english
+      TextColumnName: text
       Quix__Broker__Address: kafka-broker:9092
   words-ranking:
     volumes:
