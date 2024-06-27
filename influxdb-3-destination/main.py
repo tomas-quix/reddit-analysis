@@ -50,14 +50,14 @@ service_start_state = True
 last_write_time_ns = int(time() * 1e9)  # Convert current time from seconds to nanoseconds
 
 
-def send_data_to_influx(messages: List[dict]):
+def send_data_to_influx(messages: List[dict], key, timestamp, _):
 
     points_buffer = []
 
 
     for message in messages:
         if timestamp_column == '':
-            message_time_ns = (message_context().timestamp).milliseconds * 1000 * 1000
+            message_time_ns = timestamp * 1000 * 1000
         else:
             message_time_ns = message[timestamp_column]
 
@@ -101,7 +101,7 @@ def send_data_to_influx(messages: List[dict]):
 
 sdf = app.dataframe(input_topic)
 sdf = sdf.tumbling_window(1000, 1000).reduce(lambda state, row: state + [row], lambda row: [row]).final()
-sdf = sdf.apply(lambda row: row["value"]).update(send_data_to_influx)
+sdf = sdf.apply(lambda row: row["value"]).update(send_data_to_influx, metadata=True)
 
 if __name__ == "__main__":
     logger.info("Starting application")
