@@ -24,7 +24,7 @@ deployments:
         inputType: FreeText
         description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
         required: true
-        value: python,data,kafka,announcements
+        value: Conservative,liberal
       - name: client_id
         inputType: FreeText
         description: ID of the Reddit app registered in your dev portal in Reddit.
