@@ -6,7 +6,7 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: Reddit mixed
+  - name: Reddit source
     application: reddit-source
     version: latest
     deploymentType: Service
@@ -19,12 +19,12 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write into
         required: true
-        value: mixed
+        value: reddit-raw
       - name: subreddits
         inputType: FreeText
         description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
         required: true
-        value: politics,election2024,Ask_Politics,PoliticalDiscussion,news
+        value: politics,election2024,Ask_Politics,PoliticalDiscussion,news,Conservative,trump,democrats,biden
       - name: client_id
         inputType: FreeText
         description: ID of the Reddit app registered in your dev portal in Reddit.
@@ -39,75 +39,7 @@ deployments:
         inputType: FreeText
         description: ''
         required: true
-        value: quix-source-v1.2
-  - name: Reddit Conservatives
-    application: reddit-source
-    version: latest
-    deploymentType: Service
-    resources:
-      cpu: 1000
-      memory: 500
-      replicas: 1
-    variables:
-      - name: output
-        inputType: OutputTopic
-        description: Name of the output topic to write into
-        required: true
-        value: conservative
-      - name: subreddits
-        inputType: FreeText
-        description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
-        required: true
-        value: Conservative,trump
-      - name: client_id
-        inputType: FreeText
-        description: ID of the Reddit app registered in your dev portal in Reddit.
-        required: true
-        value: {{client_id}}
-      - name: client_secret
-        inputType: Secret
-        description: Secret of the Reddit app registered in your dev portal in Reddit.
-        required: true
-        secretKey: client_secret
-      - name: user_agent_id
-        inputType: FreeText
-        description: ''
-        required: true
-        value: quix-source-v1.2
-  - name: Reddit Democrats
-    application: reddit-source
-    version: latest
-    deploymentType: Service
-    resources:
-      cpu: 1000
-      memory: 500
-      replicas: 1
-    variables:
-      - name: output
-        inputType: OutputTopic
-        description: Name of the output topic to write into
-        required: true
-        value: democrats
-      - name: subreddits
-        inputType: FreeText
-        description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
-        required: true
-        value: democrats,biden
-      - name: client_id
-        inputType: FreeText
-        description: ID of the Reddit app registered in your dev portal in Reddit.
-        required: true
-        value: {{client_id}}
-      - name: client_secret
-        inputType: Secret
-        description: Secret of the Reddit app registered in your dev portal in Reddit.
-        required: true
-        secretKey: client_secret
-      - name: user_agent_id
-        inputType: FreeText
-        description: ''
-        required: true
-        value: quix-source-v1.2
+        value: quix-source-v1.3
   - name: sentiment-analysis
     application: sentiment-analysis
     version: latest
@@ -287,16 +219,3 @@ topics:
     configuration:
       partitions: 1
       retentionInMinutes: -1
-  - name: conservative
-    configuration:
-      partitions: 1
-      replicationFactor: 2
-      retentionInMinutes: -1
-      retentionInBytes: 52428800
-  - name: democrats
-    configuration:
-      partitions: 1
-      replicationFactor: 2
-      retentionInMinutes: -1
-      retentionInBytes: 52428800
-  - name: mixed
