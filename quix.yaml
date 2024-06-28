@@ -53,7 +53,7 @@ deployments:
         inputType: InputTopic
         description: This is the raw data input topic
         required: true
-        value: reddit-raw
+        value: reddit-classified
       - name: output
         inputType: OutputTopic
         description: This is the output for the hugging face model score
