@@ -219,3 +219,6 @@ topics:
     configuration:
       partitions: 1
       retentionInMinutes: -1
+
+
+
