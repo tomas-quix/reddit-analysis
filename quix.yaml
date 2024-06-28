@@ -197,7 +197,7 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write to.
         required: false
-        value: sentiment-1hour
+        value: sentiment-1day
   - name: Party classifier
     application: party-classifier
     version: latest
