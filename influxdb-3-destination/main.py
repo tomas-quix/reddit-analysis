@@ -34,7 +34,7 @@ timestamp_column = os.environ.get("TIMESTAMP_COLUMN", "")
 # Create a Quix platform-specific application instead
 app = Application.Quix(consumer_group=consumer_group_name, auto_offset_reset="earliest", use_changelog_topics=False)
 
-input_topic = app.topic(os.environ["input"], timestamp_extractor=lambda *_: int(time() * 1000))
+input_topic = app.topic(os.environ["input"])
                                            
 influx3_client = InfluxDBClient3(token=os.environ["INFLUXDB_TOKEN"],
                          host=os.environ["INFLUXDB_HOST"],
@@ -71,10 +71,10 @@ def send_data_to_influx(messages: List[dict], key, timestamp, _):
             for tag_key in message["tags"]:
                 tags[tag_key] = message["tags"][tag_key]
 
-            for field_key in message:
-                if field_key == "tags" or field_key == timestamp_column:
-                    continue
-                fields[field_key] = message[field_key]
+        for field_key in message:
+            if field_key == "tags" or field_key == timestamp_column:
+                continue
+            fields[field_key] = message[field_key]
 
         # Check if fields dictionary is not empty
         if not fields and not tags:
@@ -100,6 +100,10 @@ def send_data_to_influx(messages: List[dict], key, timestamp, _):
  
 
 sdf = app.dataframe(input_topic)
+
+sdf = sdf.set_timestamp(lambda row, *_: int(time() * 1000))
+
+
 sdf = sdf.tumbling_window(1000, 1000).reduce(lambda state, row: state + [row], lambda row: [row]).final()
 sdf = sdf.apply(lambda row: row["value"]).update(send_data_to_influx, metadata=True)
 
