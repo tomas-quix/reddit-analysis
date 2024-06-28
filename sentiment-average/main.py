@@ -21,7 +21,7 @@ sdf = sdf[sdf["model_result"]["score"] > 0.8]
 
 sdf = sdf.apply(lambda row: 1 if row["model_result"]["label"] == "POSITIVE" else -1)
 
-sdf = sdf.hopping_window(timedelta(days=1), timedelta(minutes=1), 5000).mean().final()
+sdf = sdf.hopping_window(timedelta(days=1), timedelta(minutes=1), timedelta(minutes=1)).mean().final()
 
 sdf = sdf.apply(lambda row, key, *_: {
     "average_sentiment_1h": row["value"],
