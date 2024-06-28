@@ -9,6 +9,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+# Set the page layout to wide
+st.set_page_config(layout="wide")
+
 # Initialize InfluxDB client
 client = InfluxDBClient3(token=os.environ["INFLUXDB_TOKEN"],
                          host=os.environ["INFLUXDB_HOST"],
@@ -40,8 +43,7 @@ fig = px.line(
                   'Democrat': 'blue'
               })
 
-# Set the page layout to wide
-st.set_page_config(layout="wide")
+
 
 # Streamlit app layout
 st.title('US election Reddit sentiment')
