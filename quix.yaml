@@ -203,7 +203,7 @@ deployments:
     version: latest
     deploymentType: Service
     resources:
-      cpu: 2000
+      cpu: 4000
       memory: 4000
       replicas: 1
     variables:
