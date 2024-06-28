@@ -198,6 +198,25 @@ deployments:
         description: Name of the output topic to write to.
         required: false
         value: sentiment-1hour
+  - name: Party classifier
+    application: party-classifier
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 2000
+      memory: 2000
+      replicas: 1
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: false
+        value: reddit-raw
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        required: false
+        value: reddit-classified
 
 # This section describes the Topics of the data pipeline
 topics:
