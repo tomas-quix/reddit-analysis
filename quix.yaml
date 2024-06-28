@@ -127,6 +127,55 @@ deployments:
         description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
         required: false
         value: ''
+  - name: influxdb-3-reddit-raw
+    application: influxdb-3-destination
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic
+        required: true
+        value: reddit-raw
+      - name: INFLUXDB_HOST
+        inputType: FreeText
+        description: Host address for the InfluxDB instance.
+        required: true
+        value: https://us-east-1-1.aws.cloud2.influxdata.com
+      - name: INFLUXDB_TOKEN
+        inputType: Secret
+        description: Authentication token to access InfluxDB.
+        required: true
+        secretKey: INFLUXDB_TOKEN
+      - name: INFLUXDB_ORG
+        inputType: FreeText
+        description: Organization name in InfluxDB.
+        required: false
+        value: Quix
+      - name: INFLUXDB_MEASUREMENT_NAME
+        inputType: FreeText
+        description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
+        required: false
+        value: reddit-raw
+      - name: INFLUXDB_DATABASE
+        inputType: FreeText
+        description: Database name in InfluxDB where data should be stored.
+        required: true
+        value: Quix
+      - name: CONSUMER_GROUP_NAME
+        inputType: FreeText
+        description: The name of the consumer group to use when consuming from Kafka
+        required: true
+        value: influxdb-sink
+      - name: TIMESTAMP_COLUMN
+        inputType: FreeText
+        description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
+        required: false
+        value: ''
   - name: influxdb-3-sentiment-average-1h
     application: influxdb-3-destination
     version: latest
