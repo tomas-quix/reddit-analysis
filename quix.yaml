@@ -19,12 +19,12 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write into
         required: true
-        value: reddit-raw
+        value: conservative
       - name: subreddits
         inputType: FreeText
         description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
         required: true
-        value: Conservative,democrats
+        value: Conservative,trump
       - name: client_id
         inputType: FreeText
         description: ID of the Reddit app registered in your dev portal in Reddit.
