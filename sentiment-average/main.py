@@ -6,12 +6,16 @@ from quixstreams import Application
 from dotenv import load_dotenv
 load_dotenv()
 
-app = Application(consumer_group="sentiment-average-v1.2", auto_offset_reset="earliest")
+app = Application(consumer_group="sentiment-average-v2.1", auto_offset_reset="earliest")
 
 input_topic = app.topic(os.environ["input"])
 output_topic = app.topic(os.environ["output"])
 
 sdf = app.dataframe(input_topic)
+
+sdf = sdf[sdf.contains("party")]
+
+sdf = sdf.group_by("party")
 
 sdf = sdf[sdf["model_result"]["score"] > 0.8]
 
@@ -23,7 +27,7 @@ sdf = sdf.apply(lambda row, key, *_: {
     "average_sentiment_1h": row["value"],
     "timestamp": row["end"] * 1000000,
     "tags": {
-        "subredit": bytes.decode(key)
+        "party": key
     }
 }, metadata=True)
 
