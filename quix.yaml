@@ -170,7 +170,7 @@ deployments:
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
         required: true
-        value: influxdb-sink-v3
+        value: influxdb-sink-v3.1
       - name: TIMESTAMP_COLUMN
         inputType: FreeText
         description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
