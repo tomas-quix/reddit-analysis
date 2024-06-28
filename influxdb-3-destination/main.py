@@ -101,9 +101,6 @@ def send_data_to_influx(messages: List[dict], key, timestamp, _):
 
 sdf = app.dataframe(input_topic)
 
-sdf = sdf.set_timestamp(lambda row, *_: int(time() * 1000))
-
-
 sdf = sdf.tumbling_window(1000, 1000).reduce(lambda state, row: state + [row], lambda row: [row]).final()
 sdf = sdf.apply(lambda row: row["value"]).update(send_data_to_influx, metadata=True)
 
