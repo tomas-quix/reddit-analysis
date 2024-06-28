@@ -155,7 +155,7 @@ deployments:
         inputType: FreeText
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
-        value: sentiment-average-1h
+        value: sentiment-average-1h-window
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
@@ -165,12 +165,12 @@ deployments:
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
         required: true
-        value: influxdb-sink-v2
+        value: influxdb-sink-v2.1
       - name: TIMESTAMP_COLUMN
         inputType: FreeText
         description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
         required: false
-        value: ''
+        value: timestamp
   - name: sentiment-average
     application: sentiment-average
     version: latest
