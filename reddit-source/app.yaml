@@ -14,12 +14,15 @@ variables:
   - name: client_id
     inputType: FreeText
     description: ID of the Reddit app registered in your dev portal in Reddit.
-    defaultValue: 
     required: true
   - name: client_secret
     inputType: Secret
     description: Secret of the Reddit app registered in your dev portal in Reddit.
-    defaultValue: 
+    required: true
+  - name: user_agent_id
+    inputType: FreeText
+    description: ''
+    defaultValue: quix-source-v1.1
     required: true
 dockerfile: dockerfile
 runEntryPoint: main.py
