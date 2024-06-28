@@ -1,9 +1,25 @@
 name: dashboard
 language: Python
 variables:
-  - name: input
-    inputType: InputTopic
-    description: Name of the input topic to listen to.
+  - name: INFLUXDB_HOST
+    inputType: FreeText
+    description: Host address for the InfluxDB instance.
+    defaultValue: https://us-east-1-1.aws.cloud2.influxdata.com
+    required: true
+  - name: INFLUXDB_TOKEN
+    inputType: Secret
+    description: Authentication token to access InfluxDB.
+    defaultValue: ''
+    required: true
+  - name: INFLUXDB_ORG
+    inputType: FreeText
+    description: Organization name in InfluxDB.
+    defaultValue: 'Quix'
+    required: false
+  - name: INFLUXDB_DATABASE
+    inputType: FreeText
+    description: Database name in InfluxDB where data should be stored.
+    defaultValue: 'Quix'
     required: true
 dockerfile: dockerfile
 runEntryPoint: main.py

@@ -15,9 +15,6 @@ client = InfluxDBClient3(token=os.environ["INFLUXDB_TOKEN"],
                          org=os.environ["INFLUXDB_ORG"],
                          database=os.environ["INFLUXDB_DATABASE"])
 
-# Get the measurement name to write data to
-measurement_name = os.environ.get("INFLUXDB_MEASUREMENT_NAME", "measurement1")
-
 # Query InfluxDB
 query = '''
 SELECT *
