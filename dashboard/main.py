@@ -46,8 +46,8 @@ fig = px.line(
 
 
 # Streamlit app layout
-st.title('US election Reddit sentiment')
-st.write('This dashboard visualizes the sentiment average over the last 24 hours displaying 24 hours rolling average.')
+st.title('Realtime US election Reddit analysis')
+st.write('This dashboard visualizes the sentiment average over the last 24 hours displaying 24 hours rolling average updated every minute.')
 
 st.plotly_chart(fig)
 
