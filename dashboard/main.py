@@ -40,6 +40,9 @@ fig = px.line(
                   'Democrat': 'blue'
               })
 
+# Set the page layout to wide
+st.set_page_config(layout="wide")
+
 # Streamlit app layout
 st.title('US election Reddit sentiment')
 st.write('This dashboard visualizes the sentiment average over the last 3 days displaying 24 hours rolling average.')
