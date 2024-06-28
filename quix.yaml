@@ -72,7 +72,7 @@ deployments:
         inputType: InputTopic
         description: Name of the input topic to listen to.
         required: false
-        value: reddit-raw
+        value: reddit-classified
       - name: output
         inputType: OutputTopic
         description: Name of the output topic to write to.
