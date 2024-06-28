@@ -214,3 +214,9 @@ topics:
     configuration:
       partitions: 1
       retentionInMinutes: -1
+  - name: conservative
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: -1
+      retentionInBytes: 52428800
