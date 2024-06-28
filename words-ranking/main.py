@@ -29,6 +29,7 @@ def download_resources():
         nltk.download('averaged_perceptron_tagger')
         nltk.download('maxent_ne_chunker')
         nltk.download('words')
+        nltk.download('punkt')
     except Exception as e:
         print("Error downloading resources:", e)
 
