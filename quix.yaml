@@ -35,6 +35,11 @@ deployments:
         description: Secret of the Reddit app registered in your dev portal in Reddit.
         required: true
         secretKey: client_secret
+      - name: user_agent_id
+        inputType: FreeText
+        description: ''
+        required: true
+        value: quix-source-v1.1
   - name: sentiment-analysis
     application: sentiment-analysis
     version: latest
