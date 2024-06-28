@@ -1,4 +1,5 @@
 influxdb3-python==0.3.6
 streamlit==1.22
+streamlit-autorefresh
 plotly
 python-dotenv

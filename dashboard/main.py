@@ -4,6 +4,7 @@ import pandas as pd
 import plotly.express as px
 import datetime
 import os
+from streamlit_autorefresh import st_autorefresh
 
 # for local dev, load env vars from a .env file
 from dotenv import load_dotenv
@@ -11,6 +12,9 @@ load_dotenv()
 
 # Set the page layout to wide
 st.set_page_config(layout="wide")
+
+# Automatically refresh the page every minute (60,000 ms)
+st_autorefresh(interval=60000, key="datarefresh")
 
 # Initialize InfluxDB client
 client = InfluxDBClient3(token=os.environ["INFLUXDB_TOKEN"],
