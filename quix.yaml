@@ -299,3 +299,4 @@ topics:
       replicationFactor: 2
       retentionInMinutes: -1
       retentionInBytes: 52428800
+  - name: mixed
