@@ -140,7 +140,7 @@ deployments:
         inputType: InputTopic
         description: This is the input topic
         required: true
-        value: sentiment-1hour
+        value: sentiment-1day
       - name: INFLUXDB_HOST
         inputType: FreeText
         description: Host address for the InfluxDB instance.
@@ -160,7 +160,7 @@ deployments:
         inputType: FreeText
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
-        value: party-sentiment-average-1h
+        value: party-sentiment-average-1day
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
@@ -197,7 +197,7 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write to.
         required: false
-        value: sentiment-1hour
+        value: sentiment-1day
   - name: Party classifier
     application: party-classifier
     version: latest
@@ -245,3 +245,10 @@ topics:
       retentionInMinutes: -1
       retentionInBytes: 52428800
   - name: transform
+  - name: sentiment-1day
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: -1
+      retentionInBytes: 52428800
+  - name: csv-data
