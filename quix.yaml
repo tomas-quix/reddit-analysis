@@ -6,8 +6,8 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: reddit-source
-    application: Reddit mixed
+  - name: Reddit mixed
+    application: reddit-source
     version: latest
     deploymentType: Service
     resources:
@@ -40,8 +40,8 @@ deployments:
         description: ''
         required: true
         value: quix-source-v1.2
-  - name: reddit-source
-    application: Reddit Conservatives
+  - name: Reddit Conservatives
+    application: reddit-source
     version: latest
     deploymentType: Service
     resources:
@@ -74,8 +74,8 @@ deployments:
         description: ''
         required: true
         value: quix-source-v1.2
-  - name: reddit-source
-    application: Reddit Democrats
+  - name: Reddit Democrats
+    application: reddit-source
     version: latest
     deploymentType: Service
     resources:
