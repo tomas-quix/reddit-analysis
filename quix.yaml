@@ -284,6 +284,25 @@ deployments:
         description: ''
         required: true
         secretKey: openai_key
+  - name: Party classifier
+    application: party-classifier
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 1000
+      memory: 4000
+      replicas: 1
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: false
+        value: reddit-raw
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        required: false
+        value: reddit-classified
 
 # This section describes the Topics of the data pipeline
 topics:
