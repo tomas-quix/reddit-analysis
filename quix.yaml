@@ -334,3 +334,4 @@ topics:
       retentionInBytes: 52428800
   - name: metrics-1day-average
   - name: mixed-classified
+  - name: model-output
