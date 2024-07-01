@@ -323,3 +323,4 @@ topics:
   - name: model-output
     configuration:
       retentionInMinutes: -1
+  - name: metrics-1hour-average
