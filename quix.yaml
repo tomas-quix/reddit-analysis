@@ -327,12 +327,6 @@ topics:
       retentionInMinutes: -1
       retentionInBytes: 52428800
   - name: transform
-  - name: sentiment-1day
-    configuration:
-      partitions: 1
-      replicationFactor: 2
-      retentionInMinutes: -1
-      retentionInBytes: 52428800
   - name: model-output
     configuration:
       retentionInMinutes: -1
