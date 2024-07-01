@@ -26,8 +26,6 @@ def select_party(row: dict):
 
 sdf = app.dataframe(input_topic)
 
-sdf = sdf[sdf["subreddit"] != "AskReddit"]
-
 sdf["text"] = sdf.apply(lambda row: (row["title"] + "\n " + row["selftext"])[:512])
 sdf["classification"] = sdf.apply(lambda row: classifier(row["text"], candidate_labels))
 
