@@ -260,6 +260,25 @@ deployments:
         description: Database name in InfluxDB where data should be stored.
         required: true
         value: Quix
+  - name: Sentiment Analysis
+    application: sentiment-analysis
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 4
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the raw data input topic
+        required: true
+        value: reddit-raw
+      - name: output
+        inputType: OutputTopic
+        description: This is the output for the hugging face model score
+        required: true
+        value: model-output
 
 # This section describes the Topics of the data pipeline
 topics:
@@ -273,7 +292,7 @@ topics:
       retentionInMinutes: -1
   - name: reddit-raw
     configuration:
-      partitions: 1
+      partitions: 4
       replicationFactor: 2
       retentionInMinutes: -1
       retentionInBytes: 52428800
@@ -297,3 +316,5 @@ topics:
   - name: csv-data
   - name: hugging-face-output
   - name: model-output
+    configuration:
+      retentionInMinutes: -1
