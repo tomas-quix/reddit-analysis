@@ -40,25 +40,6 @@ deployments:
         description: ''
         required: true
         value: quix-source-v1.3
-  - name: sentiment-analysis
-    application: sentiment-analysis
-    version: latest
-    deploymentType: Service
-    resources:
-      cpu: 1000
-      memory: 1000
-      replicas: 1
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: This is the raw data input topic
-        required: true
-        value: reddit-classified
-      - name: output
-        inputType: OutputTopic
-        description: This is the output for the hugging face model score
-        required: true
-        value: sentiment
   - name: words-ranking
     application: words-ranking
     version: latest
@@ -247,25 +228,6 @@ deployments:
         description: Name of the output topic to write to.
         required: false
         value: sentiment-1day
-  - name: Party classifier
-    application: party-classifier
-    version: latest
-    deploymentType: Service
-    resources:
-      cpu: 4000
-      memory: 4000
-      replicas: 1
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: Name of the input topic to listen to.
-        required: false
-        value: reddit-raw
-      - name: output
-        inputType: OutputTopic
-        description: Name of the output topic to write to.
-        required: false
-        value: reddit-classified
   - name: dashboard
     application: dashboard
     version: latest
@@ -333,3 +295,5 @@ topics:
       retentionInMinutes: -1
       retentionInBytes: 52428800
   - name: csv-data
+  - name: hugging-face-output
+  - name: model-output
