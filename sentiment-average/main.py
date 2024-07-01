@@ -44,6 +44,7 @@ sdf = sdf.hopping_window(timedelta(days=1), timedelta(minutes=1), timedelta(minu
 
 sdf = sdf.set_timestamp(lambda row, *_: row["end"])
 
+
 sdf = sdf.apply(lambda row, key, *_: {
     "average_1h": row["value"],
     "timestamp": row["end"] * 1000000,
