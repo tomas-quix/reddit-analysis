@@ -316,10 +316,6 @@ topics:
       replicationFactor: 2
       retentionInMinutes: -1
       retentionInBytes: 52428800
-  - name: sentiment-1hour
-    configuration:
-      partitions: 1
-      retentionInMinutes: -1
   - name: reddit-classified
     configuration:
       partitions: 1
