@@ -22,7 +22,7 @@ client = InfluxDBClient3(token=os.environ["INFLUXDB_TOKEN"],
                          database=os.environ["INFLUXDB_DATABASE"])
 
 # Streamlit app layout
-st.title('Realtime US election Reddit analysis')
+st.title('Realtime US election Reddit analysis using ChatGPT')
 
 # Add a radio button to select the time period
 time_period = st.radio(
@@ -39,7 +39,7 @@ else:
 # Query InfluxDB
 query = f'''
 SELECT *
-FROM "metrics-1hour-average"
+FROM "metrics-1h-average"
 WHERE time > now() - interval '{query_time_interval}'
 ORDER BY time
 '''
@@ -52,7 +52,7 @@ fig = px.line(
     x='time',
     y='average_1h', 
     color='metric',
-    title=f'Analysis of Reddit regarding US election for last {query_time_interval}',
+    title=f'Analysis using ChatGPT for last {query_time_interval}',
     color_discrete_map={
         'Trump': 'red',
         'Biden': 'blue',

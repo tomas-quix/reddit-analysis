@@ -190,7 +190,7 @@ deployments:
         inputType: FreeText
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
-        value: metrics-1hour-average
+        value: metrics-1h-average
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
@@ -326,3 +326,5 @@ topics:
     configuration:
       retentionInMinutes: -1
   - name: metrics-1hour-average
+    configuration:
+      retentionInMinutes: -1
