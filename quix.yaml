@@ -326,3 +326,5 @@ topics:
     configuration:
       retentionInMinutes: -1
   - name: metrics-1day-average
+    configuration:
+      retentionInMinutes: -1
