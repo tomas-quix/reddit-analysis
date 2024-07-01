@@ -8,7 +8,7 @@ load_dotenv()
 
 # Load the zero-shot classification pipeline
 classifier = pipeline("zero-shot-classification")
-candidate_labels = ["Conservative", "Democrat"]
+candidate_labels = ["Republicans", "Democrat"]
 
 
 app = Application(consumer_group="party-classifier", auto_offset_reset="earliest")
