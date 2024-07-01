@@ -289,20 +289,30 @@ deployments:
     version: latest
     deploymentType: Service
     resources:
-      cpu: 200
+      cpu: 1000
       memory: 2000
       replicas: 1
     variables:
       - name: input
         inputType: InputTopic
         description: Name of the input topic to listen to.
-        required: false
+        required: true
         value: reddit-raw
       - name: output
         inputType: OutputTopic
         description: Name of the output topic to write to.
-        required: false
+        required: true
         value: reddit-classified
+      - name: labels
+        inputType: FreeText
+        description: List of parties to label. Delimiter is comma.
+        required: true
+        value: conservatives,labour,liberals,snp,green,reform
+      - name: threshold
+        inputType: FreeText
+        description: Threshold in confidence to believe the model.
+        required: true
+        value: 0.2
 
 # This section describes the Topics of the data pipeline
 topics:
