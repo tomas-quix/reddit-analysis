@@ -39,7 +39,7 @@ else:
 # Query InfluxDB
 query = f'''
 SELECT *
-FROM "metrics-24h-average"
+FROM "metrics-1day-average"
 WHERE time > now() - interval '{query_time_interval}'
 ORDER BY time
 '''
