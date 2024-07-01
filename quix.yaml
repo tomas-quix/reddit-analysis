@@ -170,7 +170,7 @@ deployments:
         inputType: InputTopic
         description: This is the input topic
         required: true
-        value: metrics-1hour-average
+        value: metrics-1day-average
       - name: INFLUXDB_HOST
         inputType: FreeText
         description: Host address for the InfluxDB instance.
@@ -190,7 +190,7 @@ deployments:
         inputType: FreeText
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
-        value: metrics-1h-average
+        value: metrics-1day-rolling-average
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
@@ -200,7 +200,7 @@ deployments:
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
         required: true
-        value: influxdb-sink-v2.2
+        value: influxdb-sink-v2.6
       - name: TIMESTAMP_COLUMN
         inputType: FreeText
         description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
@@ -227,7 +227,7 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write to.
         required: false
-        value: metrics-1hour-average
+        value: metrics-1day-average
   - name: dashboard
     application: dashboard
     version: latest
@@ -325,6 +325,9 @@ topics:
   - name: model-output
     configuration:
       retentionInMinutes: -1
-  - name: metrics-1hour-average
+  - name: metrics-1day-average
     configuration:
+      partitions: 1
+      replicationFactor: 2
       retentionInMinutes: -1
+      retentionInBytes: 52428800
