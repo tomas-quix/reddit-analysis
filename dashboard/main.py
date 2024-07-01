@@ -25,8 +25,8 @@ client = InfluxDBClient3(token=os.environ["INFLUXDB_TOKEN"],
 # Query InfluxDB
 query = '''
 SELECT *
-FROM "party-sentiment-average-1day"
-WHERE time > now() - interval '24 hours' AND party != 'N/A'
+FROM "metrics-1hour-average"
+WHERE time > now() - interval '74 hours'
 ORDER BY time
 '''
 
@@ -39,12 +39,14 @@ df =  client.query(query=query,
 fig = px.line(
     df, 
     x='time',
-    y='average_sentiment_1h', 
-    color='party',
+    y='average_1h', 
+    color='metric',
     title='Analysis of Reddit regarding US election for last 24 hours',
     color_discrete_map={
-                  'Conservative': 'red',
-                  'Democrat': 'blue'
+                  'Trump': 'red',
+                  'Biden': 'blue',
+                  'Trump_winning': '#FF9999',  # Light red
+                  'Biden_winning': '#9999FF'   # Light blue
               })
 
 
