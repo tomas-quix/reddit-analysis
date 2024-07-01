@@ -338,6 +338,8 @@ topics:
       retentionInMinutes: -1
       retentionInBytes: 52428800
   - name: metrics-1day-average
+    configuration:
+      retentionInMinutes: -1
   - name: mixed-classified
     configuration:
       retentionInMinutes: -1
