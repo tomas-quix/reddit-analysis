@@ -39,7 +39,7 @@ deployments:
         inputType: FreeText
         description: ''
         required: true
-        value: quix-source-v1.3
+        value: quix-source-v1.4
   - name: words-ranking
     application: words-ranking
     version: latest
