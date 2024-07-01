@@ -343,3 +343,9 @@ topics:
   - name: mixed-classified
     configuration:
       retentionInMinutes: -1
+  - name: model-output
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: -1
+      retentionInBytes: 52428800
