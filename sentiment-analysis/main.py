@@ -1,17 +1,15 @@
 import os
 from quixstreams import Application
-from transformers import pipeline
 import json
 import uuid
 # Load environment variables (useful when working locally)
 from dotenv import load_dotenv
 load_dotenv()
 import datetime
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import openai
 
 # Set up the OpenAI API key
-openai.api_key = 'sk-proj-6RZdgA8P8HSKDKgFepYKT3BlbkFJYHaXJ7b18IVro3QktliT'
+openai.api_key = os.environ["openai_key"]
 
 app = Application(consumer_group="chat-gpt-v1", auto_offset_reset="earliest")
 
