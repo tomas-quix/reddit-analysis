@@ -65,9 +65,9 @@ Provide the sentiment scores in the following JSON format:
 sdf = app.dataframe(input_topic)
 
 
-keywords = ["trump", "biden","democrats", "republicans", "campaign", "debate", "election"]
+#keywords = ["trump", "biden","democrats", "republicans", "campaign", "debate", "election"]
 
-sdf = sdf.filter(lambda row: any(keyword.lower() in row["title"] for keyword in keywords))
+#sdf = sdf.filter(lambda row: any(keyword.lower() in row["title"] for keyword in keywords))
 
 
 # Assuming the input data has a 'text' column that you want to process with the model
