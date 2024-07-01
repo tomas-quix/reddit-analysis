@@ -227,7 +227,7 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write to.
         required: false
-        value: metrics-1hour-average
+        value: metrics-1day-average
   - name: dashboard
     application: dashboard
     version: latest
