@@ -310,10 +310,6 @@ topics:
     configuration:
       partitions: 1
       retentionInMinutes: -1
-  - name: sentiment
-    configuration:
-      partitions: 1
-      retentionInMinutes: -1
   - name: reddit-raw
     configuration:
       partitions: 4
