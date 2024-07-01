@@ -140,7 +140,7 @@ def print_pie(df, party: str, column):
     sorted_df = aggregated_df.sort_values(by='max', ascending=False)
 
     # the data was originally setup to use Conservatie instead of Republican
-    display_party = "Conservative" if party == "Republican" else party
+    display_party = "Republican" if party == "Conservative" else party
     fig = px.pie(sorted_df[:20], values='max', names='word', title=f'Most used words in last {query_time_interval} for ' + display_party)
     column.plotly_chart(fig)
 
@@ -151,4 +151,4 @@ with col1:
     print_pie(words_df, "Democrat", col1)
 
 with col2:
-    print_pie(words_df, "Republican", col2)
+    print_pie(words_df, "Conservative", col2)
