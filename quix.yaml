@@ -297,3 +297,5 @@ topics:
   - name: csv-data
   - name: hugging-face-output
   - name: model-output
+    configuration:
+      retentionInMinutes: -1
