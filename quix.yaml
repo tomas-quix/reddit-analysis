@@ -273,7 +273,7 @@ topics:
       retentionInMinutes: -1
   - name: reddit-raw
     configuration:
-      partitions: 1
+      partitions: 4
       replicationFactor: 2
       retentionInMinutes: -1
       retentionInBytes: 52428800
