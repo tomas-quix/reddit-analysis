@@ -11,7 +11,7 @@ classifier = pipeline("zero-shot-classification")
 candidate_labels = ["Trump", "Biden"]
 
 
-app = Application(consumer_group="party-classifier", auto_offset_reset="earliest")
+app = Application(consumer_group="party-classifier-v1", auto_offset_reset="earliest")
 
 input_topic = app.topic(os.environ["input"])
 output_topic = app.topic(os.environ["output"])
