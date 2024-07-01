@@ -291,7 +291,7 @@ deployments:
     resources:
       cpu: 200
       memory: 2000
-      replicas: 4
+      replicas: 1
     variables:
       - name: input
         inputType: InputTopic
