@@ -170,7 +170,7 @@ deployments:
         inputType: InputTopic
         description: This is the input topic
         required: true
-        value: sentiment-1day
+        value: metrics-1hour-average
       - name: INFLUXDB_HOST
         inputType: FreeText
         description: Host address for the InfluxDB instance.
@@ -190,7 +190,7 @@ deployments:
         inputType: FreeText
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
-        value: party-sentiment-average-1day
+        value: metrics-1hour-average
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
@@ -279,6 +279,11 @@ deployments:
         description: This is the output for the hugging face model score
         required: true
         value: model-output
+      - name: openai_key
+        inputType: Secret
+        description: ''
+        required: true
+        secretKey: openai_key
 
 # This section describes the Topics of the data pipeline
 topics:
@@ -318,3 +323,4 @@ topics:
   - name: model-output
     configuration:
       retentionInMinutes: -1
+  - name: metrics-1hour-average
