@@ -40,7 +40,7 @@ sdf = sdf[sdf["confidence"] >= 0.5]
 
 sdf = sdf.group_by("name").apply(lambda row: row["value"])
 
-sdf = sdf.hopping_window(timedelta(days=1), timedelta(minutes=1), timedelta(hours=3)).mean().final()
+sdf = sdf.hopping_window(timedelta(days=1), timedelta(minutes=1), timedelta(minutes=1)).mean().final()
 
 sdf = sdf.apply(lambda row, key, *_: {
     "average_1h": row["value"],
