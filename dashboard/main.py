@@ -21,8 +21,22 @@ client = InfluxDBClient3(token=os.environ["INFLUXDB_TOKEN"],
                          org=os.environ["INFLUXDB_ORG"],
                          database=os.environ["INFLUXDB_DATABASE"])
 
+st.markdown(
+    """
+    <style>
+    .main .block-container {
+        padding-top: 1rem;  /* Adjust this value as needed */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.image("quix-logo.png", use_column_width=False, width=130)
+
 # Streamlit app layout
-st.title('Realtime US election Reddit analysis using ChatGPT')
+st.title('US election real-time analysis')
+st.subheader('An analysis of Reddit conversations using Quix Streams and ChatGPT')
 
 # Add a radio button to select the time period
 time_period = st.radio(
@@ -63,6 +77,13 @@ fig = px.line(
 
 st.plotly_chart(fig)
 
+# Add a text block at the bottom with a link to a GitHub repo
+st.markdown(
+    """
+    For more details, visit our [GitHub repository]().
+    """
+)
+
 # Update the words count query based on the selected time period
 words_count_query = f'''
 SELECT max(count) as "max", word, party
@@ -89,4 +110,4 @@ with col1:
     print_pie(words_df, "Democrat", col1)
 
 with col2:
-    print_pie(words_df, "Conservative", col2)
+    print_pie(words_df, "Republicans", col2)
