@@ -11,7 +11,7 @@ deployments:
     version: latest
     deploymentType: Service
     resources:
-      cpu: 1000
+      cpu: 200
       memory: 500
       replicas: 1
     variables:
@@ -39,13 +39,13 @@ deployments:
         inputType: FreeText
         description: ''
         required: true
-        value: quix-source-v1.3
+        value: quix-source-v1.4
   - name: words-ranking
     application: words-ranking
     version: latest
     deploymentType: Service
     resources:
-      cpu: 1000
+      cpu: 200
       memory: 500
       replicas: 1
     variables:
@@ -146,7 +146,7 @@ deployments:
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: Quix
+        value: {{InfluxDb}}
       - name: CONSUMER_GROUP_NAME
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
@@ -195,7 +195,7 @@ deployments:
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: Quix
+        value: {{InfluxDb}}
       - name: CONSUMER_GROUP_NAME
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
@@ -234,7 +234,7 @@ deployments:
     deploymentType: Service
     resources:
       cpu: 1000
-      memory: 500
+      memory: 1000
       replicas: 1
     publicAccess:
       enabled: true
@@ -259,7 +259,7 @@ deployments:
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: Quix
+        value: {{InfluxDb}}
   - name: Sentiment Analysis
     application: sentiment-analysis
     version: latest
@@ -267,7 +267,7 @@ deployments:
     resources:
       cpu: 200
       memory: 500
-      replicas: 4
+      replicas: 1
     variables:
       - name: input
         inputType: InputTopic
@@ -289,8 +289,8 @@ deployments:
     version: latest
     deploymentType: Service
     resources:
-      cpu: 1000
-      memory: 4000
+      cpu: 200
+      memory: 2000
       replicas: 1
     variables:
       - name: input

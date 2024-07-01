@@ -8,10 +8,10 @@ load_dotenv()
 
 # Load the zero-shot classification pipeline
 classifier = pipeline("zero-shot-classification")
-candidate_labels = ["Conservative", "Democrat"]
+candidate_labels = ["Trump", "Biden"]
 
 
-app = Application(consumer_group="party-classifier", auto_offset_reset="earliest")
+app = Application(consumer_group="party-classifier-v1", auto_offset_reset="earliest")
 
 input_topic = app.topic(os.environ["input"])
 output_topic = app.topic(os.environ["output"])
@@ -25,6 +25,8 @@ def select_party(row: dict):
     return "N/A"
 
 sdf = app.dataframe(input_topic)
+
+sdf = sdf[sdf["subreddit"] != "AskReddit"]
 
 sdf["text"] = sdf.apply(lambda row: (row["title"] + "\n " + row["selftext"])[:512])
 sdf["classification"] = sdf.apply(lambda row: classifier(row["text"], candidate_labels))
