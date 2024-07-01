@@ -40,25 +40,6 @@ deployments:
         description: ''
         required: true
         value: quix-source-v1.3
-  - name: sentiment-analysis
-    application: sentiment-analysis
-    version: latest
-    deploymentType: Service
-    resources:
-      cpu: 1000
-      memory: 1000
-      replicas: 1
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: This is the raw data input topic
-        required: true
-        value: reddit-classified
-      - name: output
-        inputType: OutputTopic
-        description: This is the output for the hugging face model score
-        required: true
-        value: sentiment
   - name: words-ranking
     application: words-ranking
     version: latest
