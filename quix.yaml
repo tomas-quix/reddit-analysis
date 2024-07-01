@@ -24,7 +24,7 @@ deployments:
         inputType: FreeText
         description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
         required: true
-        value: politics,election2024,Ask_Politics,PoliticalDiscussion,news,Conservative,trump,democrats,biden
+        value: ukpolitics,unitedkingdom,Scotland,Wales,NorthernIreland,LabourUK,conservative,LibDems,greenparty,SocialDemocracy,PoliticalDiscussion,uknews
       - name: client_id
         inputType: FreeText
         description: ID of the Reddit app registered in your dev portal in Reddit.
@@ -39,7 +39,7 @@ deployments:
         inputType: FreeText
         description: ''
         required: true
-        value: quix-source-v1.4
+        value: quix-source-uk-v1
   - name: words-ranking
     application: words-ranking
     version: latest
