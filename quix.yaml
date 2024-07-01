@@ -259,7 +259,7 @@ deployments:
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: Quix
+        value: {{InfluxDb}}
   - name: Sentiment Analysis
     application: sentiment-analysis
     version: latest
