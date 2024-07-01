@@ -11,7 +11,7 @@ import openai
 # Set up the OpenAI API key
 openai.api_key = os.environ["openai_key"]
 
-app = Application(consumer_group="chat-gpt-v1", auto_offset_reset="earliest")
+app = Application(consumer_group="chat-gpt-v1.1", auto_offset_reset="earliest")
 
 input_topic = app.topic(os.environ["input"])
 output_topic = app.topic(os.environ["output"])
