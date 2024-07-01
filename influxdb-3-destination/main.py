@@ -5,7 +5,6 @@ from datetime import datetime
 import logging
 import pickle
 from time import time
-import time
 
 # import vendor-specific modules
 from quixstreams import Application, State
@@ -102,7 +101,7 @@ def send_data_to_influx(messages: List[dict], key, timestamp, _):
 
 sdf = app.dataframe(input_topic)
 
-sdf = sdf.apply(lambda row: [row["value"]]).update(send_data_to_influx, metadata=True)
+sdf = sdf.apply(lambda row: [row]).update(send_data_to_influx, metadata=True)
 
 if __name__ == "__main__":
     logger.info("Starting application")

@@ -68,7 +68,7 @@ def classify_words(row):
 from dotenv import load_dotenv
 load_dotenv()
 
-app = Application(consumer_group=str(uuid.uuid4()), auto_offset_reset="earliest")
+app = Application(consumer_group="words-rank-v1", auto_offset_reset="earliest")
 
 input_topic = app.topic(os.environ["input"])
 output_topic = app.topic(os.environ["output"], key_serializer='json')

@@ -146,7 +146,7 @@ deployments:
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: Quix
+        value: {{InfluxDb}}
       - name: CONSUMER_GROUP_NAME
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
@@ -190,17 +190,17 @@ deployments:
         inputType: FreeText
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
-        value: metrics-1day-rolling-avg
+        value: metrics-1day-rolling-average
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: Quix
+        value:  {{InfluxDb}}
       - name: CONSUMER_GROUP_NAME
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
         required: true
-        value: influxdb-sink-v2.6
+        value: influxdb-sink-v2.7
       - name: TIMESTAMP_COLUMN
         inputType: FreeText
         description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
@@ -259,7 +259,7 @@ deployments:
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: Quix
+        value: {{InfluxDb}}
   - name: Sentiment Analysis
     application: sentiment-analysis
     version: latest
@@ -326,3 +326,8 @@ topics:
     configuration:
       retentionInMinutes: -1
   - name: metrics-1day-average
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: -1
+      retentionInBytes: 52428800
