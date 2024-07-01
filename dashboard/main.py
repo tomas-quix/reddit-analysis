@@ -32,11 +32,50 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.image("quix-logo.png", use_column_width=False, width=130)
+# Add custom CSS to reduce the white space at the top of the page and style the title
+st.markdown(
+    """
+    <style>
+    .main .block-container {
+        padding-top: 1rem;  /* Adjust this value as needed */
+    }
+    .title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;  /* Align items to the top */
+    }
+    .title-container svg {
+        margin-left: 10px;  /* Adjust this value as needed */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# Streamlit app layout
-st.title('US election real-time analysis')
-st.subheader('An analysis of Reddit conversations using Quix Streams and ChatGPT')
+
+# Streamlit app layout with text on the left and SVG logo on the right
+st.markdown(
+    """
+    <div class="title-container">
+        <div>
+            <h1>US election real-time analysis</h1>
+            <h3>Subtitle goes here</h3>
+        </div>
+        <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288.57" width="150">
+            <g id="Layer_1-2">
+                <g>
+                    <rect x="118.03" y="118.03" width="52.46" height="52.46" fill="#0064ff"></rect>
+                    <rect x="177.05" y="177.05" width="52.46" height="52.46" rx="7.87" ry="7.87" fill="#bd2eff"></rect>
+                    <circle cx="258.36" cy="258.36" r="30.16" fill="#ff7828"></circle>
+                    <path d="M283.28,0H5.25C2.35,0,0,2.35,0,5.25V283.28c0,2.9,2.35,5.25,5.25,5.25H165.25c2.9,0,5.25-2.35,5.25-5.25v-41.97c0-2.9-2.35-5.25-5.25-5.25H52.46V52.46H236.07v113.07c0,2.9,2.35,5.25,5.25,5.25h41.97c2.9,0,5.25-2.35,5.25-5.25V5.25c0-2.9-2.35-5.25-5.25-5.25Zm301.68,118.08h-42.05c-2.9,0-5.25,2.35-5.25,5.25v160c0,2.9,2.35,5.25,5.25,5.25h42.05c2.9,0,5.25-2.35,5.25-5.25V123.32c0-2.9-2.35-5.25-5.25-5.25Zm0-91.89h-42.05c-2.9,0-5.25,2.35-5.25,5.25v42.05c0,2.9,2.35,5.25,5.25,5.25h42.05c2.9,0,5.25-2.35,5.25-5.25V31.43c0-2.9-2.35-5.25-5.25-5.25Zm-91.73,91.89h-42.05c-2.9,0-5.25,2.35-5.25,5.25v112.7h-65.63V123.28c0-2.9-2.35-5.25-5.25-5.25h-42.05c-2.9,0-5.25,2.35-5.25,5.25l.22,160.05c0,2.89,2.35,5.24,5.25,5.24h160.01c2.9,0,5.25-2.35,5.25-5.25V123.32c0-2.9-2.35-5.25-5.25-5.25Zm306.77,5.2c0-2.9-2.35-5.25-5.25-5.25h-41.97c-2.9,0-5.25,2.35-5.25,5.25v34.1l-32.79,21.86-32.79-21.86v-34.1c0-2.9-2.35-5.25-5.25-5.25h-41.97c-2.9,0-5.25,2.35-5.25,5.25v47.21l49.18,32.79-49.18,32.79v47.21c0,2.9,2.35,5.25,5.25,5.25h41.97c2.9,0,5.25-2.35,5.25-5.25v-34.45l32.6-21.63,32.98,21.98v34.1c0,2.9,2.35,5.25,5.25,5.25h41.97c2.9,0,5.25-2.35,5.25-5.25v-47.21l-49.29-32.86,49.29-32.71v-47.21Z" fill="#14174d"></path>
+                </g>
+            </g>        
+        </svg>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # Add a radio button to select the time period
 time_period = st.radio(
@@ -77,6 +116,13 @@ fig = px.line(
 
 st.plotly_chart(fig)
 
+# Add a text block at the bottom with a link to a GitHub repo
+st.markdown(
+    """
+    For more details, visit our [GitHub repository]().
+    """
+)
+
 # Update the words count query based on the selected time period
 words_count_query = f'''
 SELECT max(count) as "max", word, party
@@ -104,10 +150,3 @@ with col1:
 
 with col2:
     print_pie(words_df, "Republicans", col2)
-
-# Add a text block at the bottom with a link to a GitHub repo
-st.markdown(
-    """
-    For more details, visit our [GitHub repository](https://github.com/tomas-quix/reddit-analysis).
-    """
-)
