@@ -1,19 +1,16 @@
 import os
 from quixstreams import Application
-from datetime import timedelta, datetime
-import uuid
-import re
-import certifi
-
+from datetime import timedelta
 import nltk
-from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import TfidfVectorizer
-import uuid
-
 
 import nltk
 from nltk.corpus import stopwords
 from nltk import word_tokenize, pos_tag, ne_chunk
+
+# for local dev, load env vars from a .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Set up certifi for macOS SSL issues
 try:
@@ -35,6 +32,7 @@ def download_resources():
 
 # Download stopwords and necessary NLTK resources
 download_resources()
+
 stop_words = set(stopwords.words('english'))
 
 # Add additional plain English words to stopwords list
@@ -63,10 +61,6 @@ def classify_words(row):
                 "party": row["party"]
             }
     
-
-# for local dev, load env vars from a .env file
-from dotenv import load_dotenv
-load_dotenv()
 
 app = Application(consumer_group="words-rank-v1", auto_offset_reset="earliest")
 

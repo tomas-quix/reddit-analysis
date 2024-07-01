@@ -21,21 +21,8 @@ def update_data(row):
     
     comment = row["title"]
     
-    prompt = f"""
-Analyze the sentiment of the following text: {comment}.
-Provide a sentiment score between -1 (very negative) and 1 (very positive) for Trump and Biden. 
-Judge also based on this text, chance of winning for both from -1 (losing) to 1 (winning).
-At any moment don't deviate from JSON schema and don't add any notes, just return JSON. 
-Provide the sentiment scores in the following JSON format:
-{{
-    "Trump": <sentiment_score>, 
-    "Biden": <sentiment_score>, 
-    "Trump_winning": <trump_winning_score>,
-    "Biden_winning": <biden_winning_score>,
-    "confidence": <confidence>
-    }}.
-"""
-    
+    prompt = os.environ["prompt"].format(comment)
+
     response = openai.chat.completions.create(
         model="gpt-4o",
         messages=[
