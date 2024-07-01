@@ -234,8 +234,8 @@ deployments:
     deploymentType: Service
     resources:
       cpu: 1000
-      memory: 500
-      replicas: 1
+      memory: 1000
+      replicas: 4
     publicAccess:
       enabled: true
       urlPrefix: dashboard
