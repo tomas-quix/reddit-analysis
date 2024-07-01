@@ -295,7 +295,7 @@ deployments:
     deploymentType: Service
     resources:
       cpu: 1000
-      memory: 2000
+      memory: 4000
       replicas: 1
     variables:
       - name: input
