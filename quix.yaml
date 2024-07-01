@@ -235,7 +235,7 @@ deployments:
     resources:
       cpu: 1000
       memory: 1000
-      replicas: 4
+      replicas: 1
     publicAccess:
       enabled: true
       urlPrefix: dashboard
