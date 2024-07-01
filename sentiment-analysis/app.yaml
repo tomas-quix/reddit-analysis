@@ -9,7 +9,7 @@ variables:
   - name: output
     inputType: OutputTopic
     description: This is the output for the hugging face model score
-    defaultValue: hugging-face-output
+    defaultValue: model-output
     required: true
 dockerfile: dockerfile
 runEntryPoint: main.py
