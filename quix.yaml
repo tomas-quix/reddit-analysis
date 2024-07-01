@@ -343,6 +343,3 @@ topics:
   - name: mixed-classified
     configuration:
       retentionInMinutes: -1
-  - name: model-output
-    configuration:
-      retentionInMinutes: -1
