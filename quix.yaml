@@ -322,3 +322,4 @@ topics:
       replicationFactor: 2
       retentionInMinutes: -1
       retentionInBytes: 52428800
+  - name: metrics-1day-average
