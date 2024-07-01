@@ -77,13 +77,6 @@ fig = px.line(
 
 st.plotly_chart(fig)
 
-# Add a text block at the bottom with a link to a GitHub repo
-st.markdown(
-    """
-    For more details, visit our [GitHub repository]().
-    """
-)
-
 # Update the words count query based on the selected time period
 words_count_query = f'''
 SELECT max(count) as "max", word, party
@@ -111,3 +104,10 @@ with col1:
 
 with col2:
     print_pie(words_df, "Republicans", col2)
+
+# Add a text block at the bottom with a link to a GitHub repo
+st.markdown(
+    """
+    For more details, visit our [GitHub repository]().
+    """
+)
