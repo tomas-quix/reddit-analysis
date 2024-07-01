@@ -288,7 +288,7 @@ deployments:
         inputType: FreeText
         description: ''
         required: true
-        value: "Analyze the sentiment of the following text: {comment}.\nProvide a sentiment score between -1 (very negative) and 1 (very positive) for following UK parliament political parties: conservatives, labour, liberals, snp, green, reform.\nAt any moment don't deviate from JSON schema and don't add any notes, just return JSON.\nProvide the sentiment scores in the following JSON format:\n{{\n    \"conservatives\": <sentiment_score>, \n    \"labour\": <sentiment_score>, \n    \"liberals\": <sentiment_score>,\n    \"snp\": <sentiment_score>,\n    \"green\": <sentiment_score>,\n    \"reform\": <sentiment_score>\n}}."
+        value: "Analyze the sentiment of the following text: {0}.\nProvide a sentiment score between -1 (very negative) and 1 (very positive) for following UK parliament political parties: conservatives, labour, liberals, snp, green, reform.\nAt any moment don't deviate from JSON schema and don't add any notes, just return JSON.\nProvide the sentiment scores in the following JSON format:\n{{\n    \"conservatives\": <sentiment_score>, \n    \"labour\": <sentiment_score>, \n    \"liberals\": <sentiment_score>,\n    \"snp\": <sentiment_score>,\n    \"green\": <sentiment_score>,\n    \"reform\": <sentiment_score>\n}}."
   - name: Party classifier
     application: party-classifier
     version: latest
