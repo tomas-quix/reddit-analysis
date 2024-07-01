@@ -190,7 +190,7 @@ deployments:
         inputType: FreeText
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
-        value: metrics-1day-rolling-mean
+        value: metrics-1day-rolling-avg
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
@@ -326,5 +326,3 @@ topics:
     configuration:
       retentionInMinutes: -1
   - name: metrics-1day-average
-    configuration:
-      retentionInMinutes: -1
