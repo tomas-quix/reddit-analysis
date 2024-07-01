@@ -340,3 +340,5 @@ topics:
   - name: metrics-1day-average
   - name: mixed-classified
   - name: model-output
+    configuration:
+      retentionInMinutes: -1
