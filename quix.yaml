@@ -146,7 +146,7 @@ deployments:
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: Quix
+        value: {{InfluxDb}}
       - name: CONSUMER_GROUP_NAME
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
@@ -195,7 +195,7 @@ deployments:
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: USElection2024
+        value:  {{InfluxDb}}
       - name: CONSUMER_GROUP_NAME
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
