@@ -5,7 +5,6 @@ from datetime import datetime
 import logging
 import pickle
 from time import time
-import time
 
 # import vendor-specific modules
 from quixstreams import Application, State
