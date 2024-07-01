@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Application(
-    consumer_group="sentiment-average-v3.4", 
+    consumer_group="sentiment-average-v3.5", 
     auto_offset_reset="earliest",
     consumer_extra_config={
          'fetch.message.max.bytes': 1024 
