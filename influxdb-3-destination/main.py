@@ -34,7 +34,7 @@ timestamp_column = os.environ.get("TIMESTAMP_COLUMN", "")
 # Create a Quix platform-specific application instead
 app = Application.Quix(consumer_group=consumer_group_name, auto_offset_reset="earliest", use_changelog_topics=False)
 
-input_topic = app.topic(os.environ["input"], timestamp_extractor=lambda *_: int(time() * 1000))
+input_topic = app.topic(os.environ["input"])
                                            
 influx3_client = InfluxDBClient3(token=os.environ["INFLUXDB_TOKEN"],
                          host=os.environ["INFLUXDB_HOST"],
@@ -50,14 +50,14 @@ service_start_state = True
 last_write_time_ns = int(time() * 1e9)  # Convert current time from seconds to nanoseconds
 
 
-def send_data_to_influx(messages: List[dict]):
+def send_data_to_influx(messages: List[dict], key, timestamp, _):
 
     points_buffer = []
 
 
     for message in messages:
         if timestamp_column == '':
-            message_time_ns = (message_context().timestamp).milliseconds * 1000 * 1000
+            message_time_ns = timestamp * 1000 * 1000
         else:
             message_time_ns = message[timestamp_column]
 
@@ -71,10 +71,10 @@ def send_data_to_influx(messages: List[dict]):
             for tag_key in message["tags"]:
                 tags[tag_key] = message["tags"][tag_key]
 
-            for field_key in message:
-                if field_key == "tags" or field_key == timestamp_column:
-                    continue
-                fields[field_key] = message[field_key]
+        for field_key in message:
+            if field_key == "tags" or field_key == timestamp_column:
+                continue
+            fields[field_key] = message[field_key]
 
         # Check if fields dictionary is not empty
         if not fields and not tags:
@@ -100,8 +100,9 @@ def send_data_to_influx(messages: List[dict]):
  
 
 sdf = app.dataframe(input_topic)
+
 sdf = sdf.tumbling_window(1000, 1000).reduce(lambda state, row: state + [row], lambda row: [row]).final()
-sdf = sdf.apply(lambda row: row["value"]).update(send_data_to_influx)
+sdf = sdf.apply(lambda row: row["value"]).update(send_data_to_influx, metadata=True)
 
 if __name__ == "__main__":
     logger.info("Starting application")

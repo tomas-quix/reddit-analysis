@@ -1,15 +1,15 @@
-name: sentiment-average
+name: party-classifier
 language: Python
 variables:
   - name: input
     inputType: InputTopic
     description: Name of the input topic to listen to.
-    defaultValue: model-output
+    defaultValue: reddit-raw
     required: false
   - name: output
     inputType: OutputTopic
     description: Name of the output topic to write to.
-    defaultValue: metrics-1hour-average
+    defaultValue: mixed-classified
     required: false
 dockerfile: dockerfile
 runEntryPoint: main.py

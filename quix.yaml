@@ -6,7 +6,7 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: reddit-source
+  - name: Reddit source
     application: reddit-source
     version: latest
     deploymentType: Service
@@ -24,7 +24,7 @@ deployments:
         inputType: FreeText
         description: Comma separated list of subreddits to subscribe to. Example Python,Data,Kafka
         required: true
-        value: Conservative,liberal
+        value: politics,election2024,Ask_Politics,PoliticalDiscussion,news,Conservative,trump,democrats,biden
       - name: client_id
         inputType: FreeText
         description: ID of the Reddit app registered in your dev portal in Reddit.
@@ -35,25 +35,11 @@ deployments:
         description: Secret of the Reddit app registered in your dev portal in Reddit.
         required: true
         secretKey: client_secret
-  - name: sentiment-analysis
-    application: sentiment-analysis
-    version: latest
-    deploymentType: Service
-    resources:
-      cpu: 1000
-      memory: 1000
-      replicas: 1
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: This is the raw data input topic
+      - name: user_agent_id
+        inputType: FreeText
+        description: ''
         required: true
-        value: reddit-raw
-      - name: output
-        inputType: OutputTopic
-        description: This is the output for the hugging face model score
-        required: true
-        value: sentiment
+        value: quix-source-v1.3
   - name: words-ranking
     application: words-ranking
     version: latest
@@ -67,7 +53,7 @@ deployments:
         inputType: InputTopic
         description: Name of the input topic to listen to.
         required: false
-        value: reddit-raw
+        value: reddit-classified
       - name: output
         inputType: OutputTopic
         description: Name of the output topic to write to.
@@ -106,12 +92,12 @@ deployments:
         inputType: FreeText
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
-        value: words-count
+        value: party-words-count
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
         required: true
-        value: Quix
+        value: {{InfluxDb}}
       - name: CONSUMER_GROUP_NAME
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
@@ -122,7 +108,7 @@ deployments:
         description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
         required: false
         value: ''
-  - name: influxdb-3-sentiment-average-1h
+  - name: influxdb-3-reddit-raw
     application: influxdb-3-destination
     version: latest
     deploymentType: Service
@@ -135,7 +121,7 @@ deployments:
         inputType: InputTopic
         description: This is the input topic
         required: true
-        value: sentiment-1hour
+        value: reddit-raw
       - name: INFLUXDB_HOST
         inputType: FreeText
         description: Host address for the InfluxDB instance.
@@ -155,7 +141,7 @@ deployments:
         inputType: FreeText
         description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
         required: false
-        value: sentiment-average-1h
+        value: reddit-raw
       - name: INFLUXDB_DATABASE
         inputType: FreeText
         description: Database name in InfluxDB where data should be stored.
@@ -165,12 +151,61 @@ deployments:
         inputType: FreeText
         description: The name of the consumer group to use when consuming from Kafka
         required: true
-        value: influxdb-sink
+        value: influxdb-sink-v3.3
       - name: TIMESTAMP_COLUMN
         inputType: FreeText
         description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
         required: false
         value: ''
+  - name: influxdb-3-sentiment-average-1h
+    application: influxdb-3-destination
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic
+        required: true
+        value: metrics-1hour-average
+      - name: INFLUXDB_HOST
+        inputType: FreeText
+        description: Host address for the InfluxDB instance.
+        required: true
+        value: https://us-east-1-1.aws.cloud2.influxdata.com
+      - name: INFLUXDB_TOKEN
+        inputType: Secret
+        description: Authentication token to access InfluxDB.
+        required: true
+        secretKey: INFLUXDB_TOKEN
+      - name: INFLUXDB_ORG
+        inputType: FreeText
+        description: Organization name in InfluxDB.
+        required: false
+        value: Quix
+      - name: INFLUXDB_MEASUREMENT_NAME
+        inputType: FreeText
+        description: The InfluxDB measurement to write data to. If not specified, the name of the input topic will be used
+        required: false
+        value: metrics-1hour-average
+      - name: INFLUXDB_DATABASE
+        inputType: FreeText
+        description: Database name in InfluxDB where data should be stored.
+        required: true
+        value: Quix
+      - name: CONSUMER_GROUP_NAME
+        inputType: FreeText
+        description: The name of the consumer group to use when consuming from Kafka
+        required: true
+        value: influxdb-sink-v2.2
+      - name: TIMESTAMP_COLUMN
+        inputType: FreeText
+        description: 'The column containing the timestamp column. NOTE: Must be nanoseconds'
+        required: false
+        value: timestamp
   - name: sentiment-average
     application: sentiment-average
     version: latest
@@ -187,12 +222,87 @@ deployments:
         inputType: InputTopic
         description: Name of the input topic to listen to.
         required: false
-        value: sentiment
+        value: model-output
       - name: output
         inputType: OutputTopic
         description: Name of the output topic to write to.
         required: false
-        value: sentiment-1hour
+        value: metrics-1hour-average
+  - name: dashboard
+    application: dashboard
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 1000
+      memory: 500
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: dashboard
+    variables:
+      - name: INFLUXDB_HOST
+        inputType: FreeText
+        description: Host address for the InfluxDB instance.
+        required: true
+        value: https://us-east-1-1.aws.cloud2.influxdata.com
+      - name: INFLUXDB_TOKEN
+        inputType: Secret
+        description: Authentication token to access InfluxDB.
+        required: true
+        secretKey: INFLUXDB_TOKEN
+      - name: INFLUXDB_ORG
+        inputType: FreeText
+        description: Organization name in InfluxDB.
+        required: false
+        value: Quix
+      - name: INFLUXDB_DATABASE
+        inputType: FreeText
+        description: Database name in InfluxDB where data should be stored.
+        required: true
+        value: Quix
+  - name: Sentiment Analysis
+    application: sentiment-analysis
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 4
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the raw data input topic
+        required: true
+        value: reddit-raw
+      - name: output
+        inputType: OutputTopic
+        description: This is the output for the hugging face model score
+        required: true
+        value: model-output
+      - name: openai_key
+        inputType: Secret
+        description: ''
+        required: true
+        secretKey: openai_key
+  - name: Party classifier
+    application: party-classifier
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 1000
+      memory: 4000
+      replicas: 1
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: false
+        value: reddit-raw
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        required: false
+        value: reddit-classified
 
 # This section describes the Topics of the data pipeline
 topics:
@@ -200,17 +310,19 @@ topics:
     configuration:
       partitions: 1
       retentionInMinutes: -1
-  - name: sentiment
-    configuration:
-      partitions: 1
-      retentionInMinutes: -1
   - name: reddit-raw
+    configuration:
+      partitions: 4
+      replicationFactor: 2
+      retentionInMinutes: -1
+      retentionInBytes: 52428800
+  - name: reddit-classified
     configuration:
       partitions: 1
       replicationFactor: 2
       retentionInMinutes: -1
       retentionInBytes: 52428800
-  - name: sentiment-1hour
+  - name: model-output
     configuration:
-      partitions: 1
       retentionInMinutes: -1
+  - name: metrics-1hour-average

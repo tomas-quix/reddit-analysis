@@ -9,7 +9,12 @@ variables:
   - name: output
     inputType: OutputTopic
     description: This is the output for the hugging face model score
-    defaultValue: hugging-face-output
+    defaultValue: model-output
+    required: true
+  - name: openai_key
+    inputType: Secret
+    description: ''
+    defaultValue: openai_key
     required: true
 dockerfile: dockerfile
 runEntryPoint: main.py
