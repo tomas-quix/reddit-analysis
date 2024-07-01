@@ -279,6 +279,11 @@ deployments:
         description: This is the output for the hugging face model score
         required: true
         value: model-output
+      - name: openai_key
+        inputType: Secret
+        description: ''
+        required: true
+        secretKey: openai_key
 
 # This section describes the Topics of the data pipeline
 topics:
