@@ -59,7 +59,7 @@ st.markdown(
     <div class="title-container">
         <div>
             <h1>US election real-time analysis</h1>
-            <h3>Subtitle goes here</h3>
+            <h3>Reddit analysis using ChatGPT</h3>
         </div>
         <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288.57" width="150">
             <g id="Layer_1-2">
