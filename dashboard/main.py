@@ -91,4 +91,4 @@ selected_party = st.selectbox(
     parties
 )
 
-print_pie(words_df, "Democrat")
+print_pie(words_df, selected_party)
