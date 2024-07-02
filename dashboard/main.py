@@ -119,7 +119,7 @@ st.plotly_chart(fig)
 # Add a text block at the bottom with a link to a GitHub repo
 st.markdown(
     """
-    For more details, visit our [GitHub repository]().
+    For more details, visit our [GitHub repository](https://github.com/tomas-quix/reddit-analysis).
     """
 )
 
