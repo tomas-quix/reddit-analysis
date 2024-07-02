@@ -94,8 +94,10 @@ parties = words_df["party"].unique()
 # Create a dropdown to select the party
 selected_party = st.selectbox(
     "Select party",
-    parties
+    parties,
+    index=0 if len(parties) > 0 else None
 )
+
 
 # Display the pie chart for the selected party
 print_pie(words_df, selected_party, query_time_interval)
