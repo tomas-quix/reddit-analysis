@@ -80,7 +80,7 @@ def print_pie(df, party: str, column):
     sorted_df = aggregated_df.sort_values(by='max', ascending=False)
 
     fig = px.pie(sorted_df[:20], values='max', names='word', title=f'Most used words in last {query_time_interval} for ' + party)
-    column.plotly_chart(fig)
+    st.plotly_chart(fig)
 
 # Get unique parties from the data
 parties = words_df["party"].unique()
@@ -91,14 +91,4 @@ selected_party = st.selectbox(
     parties
 )
 
-# # Create a column for the pie chart
-# col1 = st.columns(1)
-
-# with col1:
-#     print_pie(words_df, selected_party, col1)
-
-# Create two columns for the pie charts
-col1, col2 = st.columns(2)
-
-with col1:
-    print_pie(words_df, "Democrat", col1)
+print_pie(words_df, "Democrat", col1)
