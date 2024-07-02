@@ -94,8 +94,7 @@ parties = words_df["party"].unique()
 # Create a dropdown to select the party
 selected_party = st.selectbox(
     "Select party",
-    parties,
-    index=0 if len(parties) > 0 else None
+    parties
 )
 
 
