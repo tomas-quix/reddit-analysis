@@ -73,7 +73,7 @@ GROUP BY word, party
 
 words_df = client.query(query=words_count_query, mode="pandas", language="sql")
 
-def print_pie(df, party: str, column):
+def print_pie(df, party: str):
     df = df[df["party"] == party]
 
     aggregated_df = df.groupby('word')['max'].max().reset_index()
@@ -91,4 +91,4 @@ selected_party = st.selectbox(
     parties
 )
 
-print_pie(words_df, "Democrat", col1)
+print_pie(words_df, "Democrat")
