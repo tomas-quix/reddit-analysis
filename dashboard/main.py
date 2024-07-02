@@ -76,6 +76,10 @@ words_df = client.query(query=words_count_query, mode="pandas", language="sql")
 def print_pie(df, party: str, query_time_interval: str):
     print("Time internal=")
     print(query_time_interval)
+    
+    if query_time_interval == "":
+      query_time_interval = "interval"
+
     df = df[df["party"] == party]
 
     aggregated_df = df.groupby('word')['max'].max().reset_index()
