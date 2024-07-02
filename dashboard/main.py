@@ -73,13 +73,13 @@ GROUP BY word, party
 
 words_df = client.query(query=words_count_query, mode="pandas", language="sql")
 
-def print_pie(df, party: str):
+def print_pie(df, party: str, query_time_interval: str):
     df = df[df["party"] == party]
 
     aggregated_df = df.groupby('word')['max'].max().reset_index()
     sorted_df = aggregated_df.sort_values(by='max', ascending=False)
 
-    fig = px.pie(sorted_df[:20], values='max', names='word', title=f'Most used words in last {query_time_interval} for ' + party)
+    fig = px.pie(sorted_df[:20], values='max', names='word', title=f'Most used words in last {query_time_interval} for {party}')
     st.plotly_chart(fig)
 
 # Get unique parties from the data
@@ -91,4 +91,5 @@ selected_party = st.selectbox(
     parties
 )
 
-print_pie(words_df, selected_party)
+# Display the pie chart for the selected party
+print_pie(words_df, selected_party, query_time_interval)
