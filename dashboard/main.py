@@ -133,22 +133,30 @@ GROUP BY word, party
 
 words_df = client.query(query=words_count_query, mode="pandas", language="sql")
 
-def print_pie(df, party: str, column):
+def print_pie(df, party: str, query_time_interval: str):
+    print("Time internal=")
+    print(query_time_interval)
+    
+    if query_time_interval == "":
+      query_time_interval = "interval"
+
     df = df[df["party"] == party]
 
     aggregated_df = df.groupby('word')['max'].max().reset_index()
     sorted_df = aggregated_df.sort_values(by='max', ascending=False)
 
-    # the data was originally setup to use Conservatie instead of Republican
-    display_party = "Republican" if party == "Conservative" else party
-    fig = px.pie(sorted_df[:20], values='max', names='word', title=f'Most used words in last {query_time_interval} for ' + display_party)
-    column.plotly_chart(fig)
+    fig = px.pie(sorted_df[:20], values='max', names='word', title=f'Most used words in last {query_time_interval} for {party}')
+    st.plotly_chart(fig)
 
-# Create two columns for the pie charts
-col1, col2 = st.columns(2)
+# Get unique parties from the data
+parties = words_df["party"].unique()
 
-with col1:
-    print_pie(words_df, "Democrat", col1)
+# Create a dropdown to select the party
+selected_party = st.selectbox(
+    "Select party",
+    parties
+)
 
-with col2:
-    print_pie(words_df, "Conservative", col2)
+
+# Display the pie chart for the selected party
+print_pie(words_df, selected_party, query_time_interval)
