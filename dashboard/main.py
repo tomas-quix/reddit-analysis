@@ -98,7 +98,7 @@ selected_party = st.selectbox(
 #     print_pie(words_df, selected_party, col1)
 
 # Create two columns for the pie charts
-col1 = st.columns(1)
+col1, col2 = st.columns(2)
 
 with col1:
     print_pie(words_df, "Democrat", col1)
