@@ -92,7 +92,7 @@ selected_party = st.selectbox(
 )
 
 # Create a column for the pie chart
-col1 = st.column(1)
+col1 = st.columns(1)
 
 with col1:
     print_pie(words_df, selected_party, col1)
