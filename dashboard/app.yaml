@@ -14,12 +14,17 @@ variables:
   - name: INFLUXDB_ORG
     inputType: FreeText
     description: Organization name in InfluxDB.
-    defaultValue: 'Quix'
+    defaultValue: Quix
     required: false
   - name: INFLUXDB_DATABASE
     inputType: FreeText
     description: Database name in InfluxDB where data should be stored.
-    defaultValue: 'Quix'
+    defaultValue: Quix
+    required: true
+  - name: title
+    inputType: FreeText
+    description: ''
+    defaultValue: UK election real-time analysis
     required: true
 dockerfile: dockerfile
 runEntryPoint: main.py
