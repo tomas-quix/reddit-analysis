@@ -3,11 +3,15 @@ from influxdb_client_3 import Point, InfluxDBClient3
 import pandas as pd
 import plotly.express as px
 import os
+import json
 from streamlit_autorefresh import st_autorefresh
 
 # for local dev, load env vars from a .env file
 from dotenv import load_dotenv
 load_dotenv()
+
+title = os.environ["title"]
+colors = json.loads(os.environ["colors"])
 
 # Set the page layout to wide
 st.set_page_config(layout="wide")
@@ -55,10 +59,10 @@ st.markdown(
 
 # Streamlit app layout with text on the left and SVG logo on the right
 st.markdown(
-    """
+    f"""
     <div class="title-container">
         <div>
-            <h1>US election real-time analysis</h1>
+            <h1>{title}</h1>
             <h3>Reddit analysis using ChatGPT</h3>
         </div>
         <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288.57" width="150">
@@ -106,12 +110,7 @@ fig = px.line(
     y='average_1h', 
     color='metric',
     title=f'Analysis using ChatGPT for last {query_time_interval}',
-    color_discrete_map={
-        'Trump': 'red',
-        'Biden': 'blue',
-        'Trump_winning': '#FF9999',  # Light red
-        'Biden_winning': '#9999FF'   # Light blue
-    }
+    color_discrete_map=colors
 )
 
 st.plotly_chart(fig)
