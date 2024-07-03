@@ -7,6 +7,17 @@ import json
 from streamlit_autorefresh import st_autorefresh
 import streamlit.components.v1 as components
 
+
+# for local dev, load env vars from a .env file
+from dotenv import load_dotenv
+load_dotenv()
+
+title = os.environ["title"]
+colors = json.loads(os.environ["colors"])
+
+# Set the page layout to wide
+st.set_page_config(layout="wide")
+
 # Define the custom HTML with OG meta tags
 og_meta_tags = """
 <head>
@@ -19,17 +30,8 @@ og_meta_tags = """
 """
 
 # Inject the custom HTML
-#components.html(og_meta_tags, height=0, width=0)
+components.html(og_meta_tags, height=0, width=0)
 
-# for local dev, load env vars from a .env file
-from dotenv import load_dotenv
-load_dotenv()
-
-title = os.environ["title"]
-colors = json.loads(os.environ["colors"])
-
-# Set the page layout to wide
-st.set_page_config(layout="wide")
 
 # Automatically refresh the page every minute (60,000 ms)
 st_autorefresh(interval=60000, key="datarefresh")
