@@ -1,10 +1,4 @@
 # Reddit Analysis
-
-![Stars](https://img.shields.io/github/stars/tomas-quix/reddit-analysis)
-![Forks](https://img.shields.io/github/forks/tomas-quix/reddit-analysis)
-
-## Overview
-
 As there are many elections around the world right now, I have put together this little stream processing pipeline to analyse Reddit data in real-time to measure how people react to unfolding situations during debates, election nights, etc. Feel free to fork it and change the analysis, right now it is a blend of ChatGPT and transformers. 
 
 ## Services
