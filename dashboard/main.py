@@ -19,7 +19,7 @@ og_meta_tags = """
 """
 
 # Inject the custom HTML
-components.html(og_meta_tags, height=0, width=0)
+#components.html(og_meta_tags, height=0, width=0)
 
 # for local dev, load env vars from a .env file
 from dotenv import load_dotenv
