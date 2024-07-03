@@ -111,7 +111,7 @@ fig = px.line(
     x='time',
     y='average_1h', 
     color='metric',
-    title=f'Analysis using ChatGPT for last {query_time_interval}',
+    title=f'Reddit Analysis using ChatGPT for last {query_time_interval}',
     color_discrete_map=colors,
     labels={
         'time': 'Time in UTC',  # X-axis title
