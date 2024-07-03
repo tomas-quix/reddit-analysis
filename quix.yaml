@@ -260,6 +260,16 @@ deployments:
         description: Database name in InfluxDB where data should be stored.
         required: true
         value: {{InfluxDb}}
+      - name: title
+        inputType: FreeText
+        description: ''
+        required: true
+        value: UK election real-time analysis
+      - name: colors
+        inputType: FreeText
+        description: ''
+        required: true
+        value: '{"Conservative": "#0087DC", "Labour": "#DC241f", "Liberal Democrat": "#FDBB30", "Green": "#6AB023", "SNP": "#FFF95D", "Plaid Cymru": "#3F8428", "Reform": "#12B6CF" }'
   - name: Sentiment Analysis
     application: sentiment-analysis
     version: latest
