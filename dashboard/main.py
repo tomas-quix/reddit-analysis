@@ -18,6 +18,7 @@ colors = json.loads(os.environ["colors"])
 # Set the page layout to wide
 st.set_page_config(layout="wide", page_title="UK election analysis")
 
+
 # Automatically refresh the page every minute (60,000 ms)
 st_autorefresh(interval=60000, key="datarefresh")
 
@@ -89,6 +90,9 @@ time_period = st.radio(
     ("Last 24 hours", "Last 1 week")
 )
 
+col1, col2 = st.columns(2)
+
+
 # Set the query based on the selected time period
 if time_period == "Last 24 hours":
     query_time_interval = "24 hours"
@@ -120,10 +124,10 @@ fig = px.line(
     }
 )
 
-st.plotly_chart(fig)
+col1.plotly_chart(fig)
 
 # Add a text block at the bottom with a link to a GitHub repo
-st.markdown(
+col1.markdown(
     """
     For more details, visit our [GitHub repository](https://github.com/tomas-quix/reddit-analysis).
     """
@@ -152,13 +156,13 @@ def print_pie(df, party: str, query_time_interval: str):
     sorted_df = aggregated_df.sort_values(by='sum', ascending=False)
 
     fig = px.pie(sorted_df[:20], values='sum', names='word', title=f'Most used words in last {query_time_interval} for {party}')
-    st.plotly_chart(fig)
+    col2.plotly_chart(fig)
 
 # Get unique parties from the data
 parties = words_df["party"].unique()
 
 # Create a dropdown to select the party
-selected_party = st.selectbox(
+selected_party = col2.selectbox(
     "Select party",
     parties
 )
