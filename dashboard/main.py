@@ -16,22 +16,7 @@ title = os.environ["title"]
 colors = json.loads(os.environ["colors"])
 
 # Set the page layout to wide
-st.set_page_config(layout="wide")
-
-# Define the custom HTML with OG meta tags
-og_meta_tags = """
-<head>
-  <meta property="og:title" content="Realtime UK Election Reddit Analysis" />
-  <meta property="og:description" content="This dashboard visualizes the sentiment average over the last 24 hours or last week regarding the UK election, updating every minute." />
-  <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
-  <meta property="og:url" content="URL_TO_YOUR_STREAMLIT_APP" />
-  <meta name="twitter:card" content="summary_large_image">
-</head>
-"""
-
-# Inject the custom HTML
-components.html(og_meta_tags, height=0, width=0)
-
+st.set_page_config(layout="wide", page_title="UK election analysis")
 
 # Automatically refresh the page every minute (60,000 ms)
 st_autorefresh(interval=60000, key="datarefresh")
