@@ -26,6 +26,11 @@ variables:
     description: ''
     defaultValue: UK election real-time analysis
     required: true
+  - name: colors
+    inputType: FreeText
+    description: ''
+    defaultValue: '{"Conservative": "#0087DC", "Labour": "#DC241f", "Liberal Democrat": "#FDBB30", "Green": "#6AB023", "SNP": "#FFF95D", "Plaid Cymru": "#3F8428", "Reform": "#12B6CF" }'
+    required: true
 dockerfile: dockerfile
 runEntryPoint: main.py
 defaultFile: streamlit_file.py
