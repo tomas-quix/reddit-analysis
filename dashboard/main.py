@@ -112,7 +112,12 @@ fig = px.line(
     y='average_1h', 
     color='metric',
     title=f'Analysis using ChatGPT for last {query_time_interval}',
-    color_discrete_map=colors
+    color_discrete_map=colors,
+    labels={
+        'time': 'Time in UTC',  # X-axis title
+        'average_1h': 'Rolling average sentiment 24h',  # Y-axis title
+        'metric': 'Parties'  # Legend title
+    }
 )
 
 st.plotly_chart(fig)
@@ -126,7 +131,7 @@ st.markdown(
 
 # Update the words count query based on the selected time period
 words_count_query = f'''
-SELECT max(count) as "max", word, party
+SELECT sum(count) as "sum", word, party
 FROM "party-words-count"
 WHERE time > now() - interval '{query_time_interval}' AND party != 'N/A'
 GROUP BY word, party
@@ -143,10 +148,10 @@ def print_pie(df, party: str, query_time_interval: str):
 
     df = df[df["party"] == party]
 
-    aggregated_df = df.groupby('word')['max'].max().reset_index()
-    sorted_df = aggregated_df.sort_values(by='max', ascending=False)
+    aggregated_df = df.groupby('word')['sum'].max().reset_index()
+    sorted_df = aggregated_df.sort_values(by='sum', ascending=False)
 
-    fig = px.pie(sorted_df[:20], values='max', names='word', title=f'Most used words in last {query_time_interval} for {party}')
+    fig = px.pie(sorted_df[:20], values='sum', names='word', title=f'Most used words in last {query_time_interval} for {party}')
     st.plotly_chart(fig)
 
 # Get unique parties from the data
