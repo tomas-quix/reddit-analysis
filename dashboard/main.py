@@ -5,6 +5,21 @@ import plotly.express as px
 import os
 import json
 from streamlit_autorefresh import st_autorefresh
+import streamlit.components.v1 as components
+
+# Define the custom HTML with OG meta tags
+og_meta_tags = """
+<head>
+  <meta property="og:title" content="Realtime UK Election Reddit Analysis" />
+  <meta property="og:description" content="This dashboard visualizes the sentiment average over the last 24 hours or last week regarding the UK election, updating every minute." />
+  <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
+  <meta property="og:url" content="URL_TO_YOUR_STREAMLIT_APP" />
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+"""
+
+# Inject the custom HTML
+components.html(og_meta_tags, height=0, width=0)
 
 # for local dev, load env vars from a .env file
 from dotenv import load_dotenv
