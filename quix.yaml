@@ -269,7 +269,7 @@ deployments:
         inputType: FreeText
         description: ''
         required: true
-        value: '{"conservative": "#0087DC", "labour": "#DC241f", "liberals": "#FDBB30", "green": "#6AB023", "snp": "#FFF95D", "Plaid Cymru": "#3F8428", "reform": "#12B6CF" }'
+        value: '{"conservatives": "#0087DC", "labour": "#DC241f", "liberals": "#FDBB30", "green": "#6AB023", "snp": "#FFF95D", "Plaid Cymru": "#3F8428", "reform": "#12B6CF" }'
   - name: Sentiment Analysis
     application: sentiment-analysis
     version: latest
