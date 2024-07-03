@@ -65,7 +65,6 @@ st.markdown(
     <div class="title-container">
         <div>
             <h1>{title}</h1>
-            <h3>Reddit analysis using ChatGPT</h3>
         </div>
         <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288.57" width="150">
             <g id="Layer_1-2">
@@ -82,9 +81,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+col1, col2 = st.columns(2)
 
 # Add a radio button to select the time period
-time_period = st.radio(
+time_period = col2.radio(
     "Select time period",
     ("Last 24 hours", "Last 1 week")
 )
@@ -120,7 +120,7 @@ fig = px.line(
     }
 )
 
-st.plotly_chart(fig)
+col1.plotly_chart(fig)
 
 # Add a text block at the bottom with a link to a GitHub repo
 st.markdown(
@@ -139,6 +139,8 @@ GROUP BY word, party
 
 words_df = client.query(query=words_count_query, mode="pandas", language="sql")
 
+col1,col2 = st.columns(2)
+
 def print_pie(df, party: str, query_time_interval: str):
     print("Time internal=")
     print(query_time_interval)
@@ -152,13 +154,13 @@ def print_pie(df, party: str, query_time_interval: str):
     sorted_df = aggregated_df.sort_values(by='sum', ascending=False)
 
     fig = px.pie(sorted_df[:20], values='sum', names='word', title=f'Most used words in last {query_time_interval} for {party}')
-    st.plotly_chart(fig)
+    col1.plotly_chart(fig)
 
 # Get unique parties from the data
 parties = words_df["party"].unique()
 
 # Create a dropdown to select the party
-selected_party = st.selectbox(
+selected_party = col2.selectbox(
     "Select party",
     parties
 )
